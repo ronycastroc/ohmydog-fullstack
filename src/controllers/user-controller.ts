@@ -1,9 +1,9 @@
-import userService from "@/service/user-service";
+import userService, { CreateUserParams } from "@/service/user-service";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 
 export const postUser = async (req: Request, res: Response) => {
-  const { name, email, password, urlImage, accountTypeId } = req.body;
+  const { name, email, password, urlImage, accountTypeId } = req.body as CreateUserParams;
 
   try {
     new URL(urlImage);
