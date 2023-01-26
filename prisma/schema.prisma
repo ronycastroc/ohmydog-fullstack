@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model accountTypes {
+  id        Int      @id @default(autoincrement())
+  type      accounts
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  users     users[]
+}
+
+model adoptionForms {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  dogId     Int
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  dogs      dogs     @relation(fields: [dogId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model comments {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  postId    Int
+  comment   String   @db.VarChar(255)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  posts     posts    @relation(fields: [postId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model dogs {
+  id            Int             @id @default(autoincrement())
+  name          String          @db.VarChar(20)
+  age           ages
+  genre         genres
+  description   String
+  urlImage      String
+  userId        Int
+  createdAt     DateTime        @default(now()) @db.Timestamptz(6)
+  users         users           @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  adoptionForms adoptionForms[]
+}
+
+model posts {
+  id        Int        @id @default(autoincrement())
+  userId    Int
+  title     String
+  text      String
+  createdAt DateTime   @default(now()) @db.Timestamptz(6)
+  users     users      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  comments  comments[]
+  stars     stars[]
+}
+
+model session {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model stars {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  postId    Int
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  posts     posts    @relation(fields: [postId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id            Int             @id @default(autoincrement())
+  name          String          @db.VarChar(50)
+  email         String          @unique @db.VarChar(50)
+  password      String          @db.VarChar(100)
+  urlImage      String
+  accountTypeId Int
+  createdAt     DateTime        @default(now()) @db.Timestamptz(6)
+  accountTypes  accountTypes    @relation(fields: [accountTypeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  adoptionForms adoptionForms[]
+  comments      comments[]
+  dogs          dogs[]
+  posts         posts[]
+  session       session[]
+  stars         stars[]
+}
+
+enum accounts {
+  Membro
+  Apoiador
+  Veterin_rio @map("Veterinário")
+}
+
+enum ages {
+  Filhote
+  Adolescente
+  Adulto
+  Idoso
+}
+
+enum genres {
+  Macho
+  F_mea @map("Fêmea")
+}
