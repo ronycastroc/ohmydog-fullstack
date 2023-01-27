@@ -15,7 +15,7 @@ const signIn = async (params: SignInParams) => {
     email: true, 
     password: true, 
     urlImage: true, 
-    accountTypeId: true 
+    accountType: true 
   });
 
   if (!user) throw requestError("email or password are incorrect");

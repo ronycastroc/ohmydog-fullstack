@@ -6,5 +6,5 @@ export const createUserSchema = joi.object<CreateUserParams>({
   email: joi.string().email().required(),
   password: joi.string().min(6).max(100).required(),
   urlImage: joi.string().required(),
-  accountTypeId: joi.number().required(),
+  accountType: joi.string().valid("Membro", "Apoiador", "Veterinario").required(),
 });

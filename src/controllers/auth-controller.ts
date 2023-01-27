@@ -13,6 +13,6 @@ export const postSignIn = async (req: Request, res: Response) => {
     if (error.message === "email or password are incorrect") {
       return res.status(httpStatus.UNAUTHORIZED).send(error.message);
     }
-    return res.status(httpStatus.BAD_REQUEST).send(error);
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
   }
 };

@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 
 export type CreateUserParams = Omit<users, "id" | "createdAt"> 
 
-export const createUser = async ({ name, email, password, urlImage, accountTypeId }: CreateUserParams): Promise<users> => {
+export const createUser = async ({ name, email, password, urlImage, accountType }: CreateUserParams): Promise<users> => {
   const emailExists = await userRepository.findByEmail(email);
 
   if (emailExists) throw requestError("DuplicatedEmailError");
@@ -17,7 +17,7 @@ export const createUser = async ({ name, email, password, urlImage, accountTypeI
     name,
     email,
     urlImage,
-    accountTypeId
+    accountType
   });
 };
 

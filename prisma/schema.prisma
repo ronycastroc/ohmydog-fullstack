@@ -1,19 +1,10 @@
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
 }
-
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-model accountTypes {
-  id        Int      @id @default(autoincrement())
-  type      accounts
-  createdAt DateTime @default(now()) @db.Timestamptz(6)
-  users     users[]
 }
 
 model adoptionForms {
@@ -82,9 +73,8 @@ model users {
   email         String          @unique @db.VarChar(50)
   password      String          @db.VarChar(100)
   urlImage      String
-  accountTypeId Int
+  accountType   accounts
   createdAt     DateTime        @default(now()) @db.Timestamptz(6)
-  accountTypes  accountTypes    @relation(fields: [accountTypeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   adoptionForms adoptionForms[]
   comments      comments[]
   dogs          dogs[]
@@ -96,7 +86,7 @@ model users {
 enum accounts {
   Membro
   Apoiador
-  Veterin_rio @map("Veterinário")
+  Veterinario
 }
 
 enum ages {
@@ -108,5 +98,5 @@ enum ages {
 
 enum genres {
   Macho
-  F_mea @map("Fêmea")
+  Femea
 }
