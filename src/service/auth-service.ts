@@ -18,11 +18,11 @@ const signIn = async (params: SignInParams) => {
     accountType: true 
   });
 
-  if (!user) throw requestError("email or password are incorrect");
+  if (!user) throw requestError("EmailOrPasswordIncorrect");
 
   const isPasswordValid = bcrypt.compareSync(password, user.password);
 
-  if (!isPasswordValid) throw requestError("email or password are incorrect");
+  if (!isPasswordValid) throw requestError("EmailOrPasswordIncorrect");
 
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 

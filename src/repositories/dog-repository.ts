@@ -7,8 +7,13 @@ const create = async (data: Prisma.dogsUncheckedCreateInput) => {
   });
 };
 
+const readDogs = async () => {
+  return prisma.dogs.findMany();
+};
+
 const dogRepository = {
   create,
+  readDogs
 };
 
 export default dogRepository;

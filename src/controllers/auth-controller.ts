@@ -10,7 +10,7 @@ export const postSignIn = async (req: Request, res: Response) => {
 
     return res.status(httpStatus.OK).send(result);
   } catch (error) {
-    if (error.message === "email or password are incorrect") {
+    if (error.message === "EmailOrPasswordIncorrect") {
       return res.status(httpStatus.UNAUTHORIZED).send(error.message);
     }
     return res.status(httpStatus.BAD_REQUEST).send(error.message);

@@ -14,9 +14,20 @@ export const postDog = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(httpStatus.CREATED).send(result);
   } catch (error) {
-    if (error.message === "Your account type is not enabled for this action") {
+    if (error.message === "AccountTypeIsNotAuthorized") {
       return res.status(httpStatus.UNAUTHORIZED).send(error.message);
     }
     return res.status(httpStatus.BAD_REQUEST).send(error.message);
   }
 };
+
+export const getDogs = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const result = await dogService.findDogs();
+
+    return res.status(httpStatus.OK).send(result);
+  } catch (error) {
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
+  }  
+};
+

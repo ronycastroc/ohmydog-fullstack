@@ -15,19 +15,26 @@ const createDog = async ({
 }: CreateDogParams): Promise<dogs> => {
   await verifyAccountType(userId);
 
-  const dog = await dogRepository.create({ name, age, genre, description, urlImage, userId });
+  const result = await dogRepository.create({ name, age, genre, description, urlImage, userId });
 
-  return dog;
+  return result;
+};
+
+const findDogs = async () => {
+  const result = await dogRepository.readDogs();
+
+  return result;
 };
 
 const verifyAccountType = async (userId: number) => {
   const isUserSupporter = await userRepository.findById(userId, { id: true, accountType: true });
 
-  if (isUserSupporter.accountType !== "Apoiador") throw requestError("Your account type is not enabled for this action");
+  if (isUserSupporter.accountType !== "Apoiador") throw requestError("AccountTypeIsNotAuthorized");
 };
 
 const dogService = {
   createDog,
+  findDogs
 };
 
 export default dogService;
