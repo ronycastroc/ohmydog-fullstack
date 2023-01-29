@@ -8,7 +8,23 @@ const create = async (data: Prisma.postsUncheckedCreateInput) => {
 };
 
 const read = async () => {
-  return prisma.posts.findMany();
+  return prisma.posts.findMany({
+    include: {
+      stars: true,
+      comments: true,
+      _count: {
+        select: {
+          stars: true,
+          comments: true
+        }
+      }
+    },
+    orderBy: {
+      stars: {
+        _count: "desc",
+      }
+    }
+  });
 };
 
 const postRepository = {
