@@ -28,11 +28,20 @@ const update = async (data: Prisma.dogsUncheckedCreateInput, dogId: number) => {
   });
 };
 
+const deleteDog = async (dogId: number) => {
+  return prisma.dogs.delete({
+    where: { 
+      id: dogId
+    }
+  });
+};
+
 const dogRepository = {
   create,
   read,
   readById,
-  update
+  update,
+  deleteDog
 };
 
 export default dogRepository;

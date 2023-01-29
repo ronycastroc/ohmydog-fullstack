@@ -66,9 +66,29 @@ export const updateDog = async (req: AuthenticatedRequest, res: Response) => {
     if (error.message === "NotFound") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);
     }
-    if (error.message === "UnauthorizedUserAction") {
+    if (error.message === "AccountTypeIsNotAuthorized") {
       return res.status(httpStatus.UNAUTHORIZED).send(error.message);
     }
     return res.status(httpStatus.BAD_REQUEST).send(error.message);
   }
 };
+
+export const deleteDog = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { userId } = req;
+    const { dogId } = req.params;  
+
+    await dogService.deleteDog(Number(dogId), userId);
+
+    return res.sendStatus(httpStatus.OK);
+  } catch (error) {
+    if (error.message === "NotFound") {
+      return res.status(httpStatus.NOT_FOUND).send(error.message);
+    }
+    if (error.message === "AccountTypeIsNotAuthorized") {
+      return res.status(httpStatus.UNAUTHORIZED).send(error.message);
+    }
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
+  }
+};
+

@@ -42,9 +42,9 @@ const updateDog = async (dogId: number, userId: number, {
   description, 
   urlImage 
 }: UpdateDogParams) => {
-  const dogById = await readDogById(dogId);
+  await readDogById(dogId);
 
-  if (userId !== dogById.userId) throw requestError("UnauthorizedUserAction");
+  await verifyAccountType(userId);
 
   const result = await dogRepository.update({
     name, 
@@ -57,6 +57,14 @@ const updateDog = async (dogId: number, userId: number, {
   return result;
 };
 
+const deleteDog = async (dogId: number, userId: number) => {
+  await readDogById(dogId);
+
+  await verifyAccountType(userId);
+
+  await dogRepository.deleteDog(dogId);
+};
+
 const verifyAccountType = async (userId: number) => {
   const isUserSupporter = await userRepository.findById(userId, { id: true, accountType: true });
 
@@ -67,7 +75,8 @@ const dogService = {
   createDog,
   readDogs,
   readDogById,
-  updateDog
+  updateDog,
+  deleteDog
 };
 
 export default dogService;
