@@ -9,8 +9,15 @@ const createPost = async ({ title, text, userId }: CreatePostParams): Promise<po
   return result;
 };
 
+const readPosts = async (): Promise<posts[]> => {
+  const result = await postRepository.read();
+
+  return result;
+};
+
 const postService = {
   createPost,
+  readPosts
 };
 
 export default postService;

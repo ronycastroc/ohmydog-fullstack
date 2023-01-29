@@ -7,8 +7,13 @@ const create = async (data: Prisma.postsUncheckedCreateInput) => {
   });
 };
 
+const read = async () => {
+  return prisma.posts.findMany();
+};
+
 const postRepository = {
   create,
+  read
 };
 
 export default postRepository;
