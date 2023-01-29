@@ -2,9 +2,10 @@ import { requestError } from "@/errors/request-error";
 import dogRepository from "@/repositories/dog-repository";
 import userRepository from "@/repositories/user-repository";
 import { dogs } from "@prisma/client";
+import dayjs from "dayjs";
 
-export type CreateDogParams = Omit<dogs, "id" | "createdAt">
-export type UpdateDogParams = Omit<dogs, "id" | "createdAt" | "userId">
+export type CreateDogParams = Omit<dogs, "id" | "createdAt" | "updatedAt">
+export type UpdateDogParams = Omit<dogs, "id" | "createdAt" |  "updatedAt" | "userId">
 
 const createDog = async ({ 
   name, 
@@ -41,9 +42,11 @@ const updateDog = async (dogId: number, userId: number, {
   genre, 
   description, 
   urlImage 
-}: UpdateDogParams) => {
+}: UpdateDogParams): Promise<dogs> => {
+  const updatedAt = dayjs().toDate();
+  
   await readDogById(dogId);
-
+  
   await verifyAccountType(userId);
 
   const result = await dogRepository.update({
@@ -52,7 +55,8 @@ const updateDog = async (dogId: number, userId: number, {
     genre, 
     description, 
     urlImage,
-    userId }, dogId);
+    userId,
+    updatedAt }, dogId);
 
   return result;
 };

@@ -3,7 +3,7 @@ import userRepository from "@/repositories/user-repository";
 import { users } from "@prisma/client";
 import bcrypt from "bcrypt";
 
-export type CreateUserParams = Omit<users, "id" | "createdAt"> 
+export type CreateUserParams = Omit<users, "id" | "createdAt" | "updatedAt"> 
 
 const createUser = async ({ name, email, password, urlImage, accountType }: CreateUserParams): Promise<users> => {
   const emailExists = await userRepository.findByEmail(email);

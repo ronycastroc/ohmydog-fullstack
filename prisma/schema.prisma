@@ -12,6 +12,7 @@ model adoptionForms {
   userId    Int
   dogId     Int
   createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @db.Timestamptz(6)
   dogs      dogs     @relation(fields: [dogId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
@@ -22,6 +23,7 @@ model comments {
   postId    Int
   comment   String   @db.VarChar(255)
   createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @db.Timestamptz(6)
   posts     posts    @relation(fields: [postId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
@@ -35,6 +37,7 @@ model dogs {
   urlImage      String
   userId        Int
   createdAt     DateTime        @default(now()) @db.Timestamptz(6)
+  updatedAt     DateTime        @default(now()) @db.Timestamptz(6)
   users         users           @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   adoptionForms adoptionForms[]
 }
@@ -45,6 +48,8 @@ model posts {
   title     String
   text      String
   createdAt DateTime   @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime   @default(now()) @db.Timestamptz(6)
+  isUpdated Boolean    @default(false)
   users     users      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   comments  comments[]
   stars     stars[]
@@ -55,6 +60,7 @@ model session {
   userId    Int
   token     String
   createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @db.Timestamptz(6)
   users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
@@ -63,6 +69,7 @@ model stars {
   userId    Int
   postId    Int
   createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @db.Timestamptz(6)
   posts     posts    @relation(fields: [postId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
@@ -75,6 +82,7 @@ model users {
   urlImage      String
   accountType   accounts
   createdAt     DateTime        @default(now()) @db.Timestamptz(6)
+  updatedAt     DateTime        @default(now()) @db.Timestamptz(6)
   adoptionForms adoptionForms[]
   comments      comments[]
   dogs          dogs[]
