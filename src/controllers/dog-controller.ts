@@ -23,11 +23,26 @@ export const postDog = async (req: AuthenticatedRequest, res: Response) => {
 
 export const getDogs = async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const result = await dogService.findDogs();
+    const result = await dogService.readDogs();
 
     return res.status(httpStatus.OK).send(result);
   } catch (error) {
     return res.status(httpStatus.BAD_REQUEST).send(error.message);
   }  
+};
+
+export const getDog = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { dogId } = req.params;
+
+    const result = await dogService.readDogById(Number(dogId));
+
+    return res.status(httpStatus.OK).send(result);
+  } catch (error) {
+    if (error.message === "NotFound") {
+      return res.status(httpStatus.NOT_FOUND).send(error.message);
+    }
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
+  }
 };
 

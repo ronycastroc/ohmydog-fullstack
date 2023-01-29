@@ -20,8 +20,16 @@ const createDog = async ({
   return result;
 };
 
-const findDogs = async () => {
-  const result = await dogRepository.readDogs();
+const readDogs = async (): Promise<dogs[]> => {
+  const result = await dogRepository.read();
+
+  return result;
+};
+
+const readDogById = async (dogId: number): Promise<dogs> => {
+  const result = await dogRepository.readById(dogId);
+
+  if (!result) throw requestError("NotFound");
 
   return result;
 };
@@ -34,7 +42,8 @@ const verifyAccountType = async (userId: number) => {
 
 const dogService = {
   createDog,
-  findDogs
+  readDogs,
+  readDogById
 };
 
 export default dogService;
