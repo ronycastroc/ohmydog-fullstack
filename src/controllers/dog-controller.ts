@@ -46,3 +46,29 @@ export const getDog = async (req: AuthenticatedRequest, res: Response) => {
   }
 };
 
+export const updateDog = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { userId } = req;
+    const { dogId } = req.params;
+    const { name, age, genre, description, urlImage } = req.body;
+
+    new URL(urlImage);
+
+    const result = await dogService.updateDog(Number(dogId), userId, {  
+      name, 
+      age, 
+      genre, 
+      description, 
+      urlImage });
+
+    return res.status(httpStatus.OK).send(result);
+  } catch (error) {
+    if (error.message === "NotFound") {
+      return res.status(httpStatus.NOT_FOUND).send(error.message);
+    }
+    if (error.message === "UnauthorizedUserAction") {
+      return res.status(httpStatus.UNAUTHORIZED).send(error.message);
+    }
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
+  }
+};

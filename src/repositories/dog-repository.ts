@@ -19,10 +19,20 @@ const readById = async (dogId: number) => {
   });
 };
 
+const update = async (data: Prisma.dogsUncheckedCreateInput, dogId: number) => {
+  return prisma.dogs.update({
+    where: {
+      id: dogId
+    },
+    data,
+  });
+};
+
 const dogRepository = {
   create,
   read,
-  readById
+  readById,
+  update
 };
 
 export default dogRepository;
