@@ -1,4 +1,4 @@
-import { getPosts, postPost } from "@/controllers/post-controller";
+import { getPostById, getPosts, postPost } from "@/controllers/post-controller";
 import { authToken } from "@/middlewares/auth-middleware";
 import { validateBody } from "@/middlewares/validation-middleware";
 import { createPostSchema } from "@/schemas/post-schema";
@@ -8,6 +8,7 @@ const postRouter = Router();
 
 postRouter
   .post("/", authToken, validateBody(createPostSchema), postPost)
-  .get("/", getPosts);
+  .get("/", getPosts)
+  .get("/:postId", authToken, getPostById);
 
 export { postRouter };

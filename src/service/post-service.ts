@@ -1,3 +1,4 @@
+import { requestError } from "@/errors/request-error";
 import postRepository from "@/repositories/post-repository";
 import { posts } from "@prisma/client";
 
@@ -15,9 +16,18 @@ const readPosts = async (): Promise<posts[]> => {
   return result;
 };
 
+const readPostById = async (postId: number): Promise<posts> => {
+  const result = await postRepository.readById(postId);
+
+  if (!result) throw requestError("NotFoundError");
+
+  return result;
+};
+
 const postService = {
   createPost,
-  readPosts
+  readPosts,
+  readPostById,
 };
 
 export default postService;

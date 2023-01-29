@@ -10,8 +10,6 @@ const create = async (data: Prisma.postsUncheckedCreateInput) => {
 const read = async () => {
   return prisma.posts.findMany({
     include: {
-      stars: true,
-      comments: true,
       _count: {
         select: {
           stars: true,
@@ -27,9 +25,26 @@ const read = async () => {
   });
 };
 
+const readById = async (postId: number) => {
+  return prisma.posts.findFirst({
+    where: {
+      id: postId,
+    },
+    include: {
+      comments: true,
+      _count: {
+        select: {
+          stars: true
+        }
+      }
+    }
+  });
+};
+
 const postRepository = {
   create,
-  read
+  read,
+  readById
 };
 
 export default postRepository;
