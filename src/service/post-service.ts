@@ -28,13 +28,24 @@ const readPostById = async (postId: number): Promise<posts> => {
 const updatePost = async ({ title, text, userId }: CreatePostParams, postId: number): Promise<posts> => {
   const updatedAt = dayjs().toDate();
   const isUpdated = true;
-  const isUserPost = await readPostById(postId);
 
-  if(isUserPost.userId !== userId) throw requestError("UnauthorizedUser");
+  await isUnauthorizedUser(postId, userId);
 
   const result = await postRepository.update({ title, text, updatedAt, isUpdated }, postId);
 
   return result;
+};
+
+const deletePost = async (postId: number, userId: number) => {
+  await isUnauthorizedUser(postId, userId);
+
+  await postRepository.deletePost(postId);
+};
+
+const isUnauthorizedUser = async (postId: number, userId: number) => {
+  const isUserPost = await readPostById(postId);
+
+  if(isUserPost.userId !== userId) throw requestError("UnauthorizedUser");
 };
 
 const postService = {
@@ -42,6 +53,7 @@ const postService = {
   readPosts,
   readPostById,
   updatePost,
+  deletePost
 };
 
 export default postService;

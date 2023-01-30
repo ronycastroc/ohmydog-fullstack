@@ -61,3 +61,22 @@ export const updatePost = async (req: AuthenticatedRequest, res: Response) => {
   }
 };
 
+export const deletePost = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { userId } = req;
+    const { postId } = req.params;
+
+    await postService.deletePost(Number(postId), userId);
+
+    res.sendStatus(httpStatus.OK);
+  } catch (error) {
+    if (error.message === "NotFound") {
+      return res.status(httpStatus.NOT_FOUND).send(error.message);
+    }
+    if (error.message === "UnauthorizedUser") {
+      return res.status(httpStatus.UNAUTHORIZED).send(error.message);
+    }
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
+  }
+};
+

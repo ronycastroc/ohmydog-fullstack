@@ -50,11 +50,20 @@ const update = async (data: Prisma.postsUncheckedUpdateWithoutUsersInput, postId
   });
 };
 
+const deletePost = async (postId: number) => {
+  return prisma.posts.delete({
+    where: {
+      id: postId,
+    }
+  });
+};
+
 const postRepository = {
   create,
   read,
   readById,
-  update
+  update,
+  deletePost
 };
 
 export default postRepository;
