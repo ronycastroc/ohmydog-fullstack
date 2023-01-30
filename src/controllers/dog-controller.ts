@@ -66,7 +66,7 @@ export const updateDog = async (req: AuthenticatedRequest, res: Response) => {
     if (error.message === "NotFound") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);
     }
-    if (error.message === "AccountTypeIsNotAuthorized") {
+    if (error.message === "AccountTypeUnauthorized") {
       return res.status(httpStatus.UNAUTHORIZED).send(error.message);
     }
     return res.status(httpStatus.BAD_REQUEST).send(error.message);

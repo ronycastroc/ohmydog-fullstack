@@ -41,3 +41,23 @@ export const getPostById = async (req: AuthenticatedRequest, res: Response) => {
   }
 };
 
+export const updatePost = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { userId } = req;
+    const { postId } = req.params;
+    const { title, text } = req.body;
+
+    const result = await postService.updatePost({ userId, title, text }, Number(postId));
+
+    return res.status(httpStatus.OK).send(result);
+  } catch (error) {
+    if (error.message === "NotFound") {
+      return res.status(httpStatus.NOT_FOUND).send(error.message);
+    }
+    if (error.message === "UnauthorizedUser") {
+      return res.status(httpStatus.UNAUTHORIZED).send(error.message);
+    }
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
+  }
+};
+

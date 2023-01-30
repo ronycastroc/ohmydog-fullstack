@@ -41,10 +41,20 @@ const readById = async (postId: number) => {
   });
 };
 
+const update = async (data: Prisma.postsUncheckedUpdateWithoutUsersInput, postId: number) => {
+  return prisma.posts.update({
+    where: {
+      id: postId,
+    },
+    data,
+  });
+};
+
 const postRepository = {
   create,
   read,
-  readById
+  readById,
+  update
 };
 
 export default postRepository;

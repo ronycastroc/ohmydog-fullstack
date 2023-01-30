@@ -35,5 +35,5 @@ export const authToken = async (req: AuthenticatedRequest, res: Response, next: 
 };
 
 const generateUnauthorizedResponse = (res: Response) => {
-  res.status(httpStatus.UNAUTHORIZED).send(requestError("You must be signed in to continue"));
+  res.status(httpStatus.UNAUTHORIZED).send("You must be signed in to continue");
 };
