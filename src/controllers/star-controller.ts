@@ -5,10 +5,11 @@ import httpStatus from "http-status";
 
 export const postStar = async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const { postId } = req.params;
+    const { postIdParams } = req.params;
+    const postId = Number(postIdParams);
     const { userId } = req;
 
-    const result = await starService.createStar(Number(postId), userId);
+    const result = await starService.createStar({ postId, userId });
 
     return res.status(httpStatus.CREATED).send(result);
   } catch (error) {
@@ -24,12 +25,13 @@ export const postStar = async (req: AuthenticatedRequest, res: Response) => {
 
 export const deleteStar = async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const { postId } = req.params;
+    const { postIdParams } = req.params;
+    const postId = Number(postIdParams);
     const { userId } = req;
 
-    await starService.deleteStar(Number(postId), userId);
+    await starService.deleteStar({ postId, userId });
 
-    res.sendStatus(httpStatus.OK);
+    return res.sendStatus(httpStatus.OK);
   } catch (error) {
     if (error.message === "NotFound") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);

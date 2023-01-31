@@ -1,9 +1,11 @@
 import { requestError } from "@/errors/request-error";
-import starRepository from "@/repositories/start-repository";
+import starRepository from "@/repositories/star-repository";
 import { stars } from "@prisma/client";
 import postService from "./post-service";
 
-const createStar = async (postId: number, userId: number): Promise<stars> => {
+export type CreateStarParams = Omit<stars, "id" | "createdAt" | "updatedAt">
+
+const createStar = async ({ postId, userId }: CreateStarParams): Promise<stars> => {
   await postService.readPostById(postId);
 
   const starExists = await starRepository.readByPostUserId(postId, userId);
@@ -15,7 +17,7 @@ const createStar = async (postId: number, userId: number): Promise<stars> => {
   return result;
 };
 
-const deleteStar = async (postId: number, userId: number) => {
+const deleteStar = async ({ postId, userId }: CreateStarParams) => {
   await postService.readPostById(postId);
 
   const starExists = await starRepository.readByPostUserId(postId, userId);
