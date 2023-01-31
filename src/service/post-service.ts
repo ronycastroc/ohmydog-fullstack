@@ -3,7 +3,7 @@ import postRepository from "@/repositories/post-repository";
 import { posts } from "@prisma/client";
 import dayjs from "dayjs";
 
-export type CreatePostParams = Omit <posts, "id" | "isUpdated" | "createdAt" | "updatedAt">
+export type CreatePostParams = Omit<posts, "id" | "isUpdated" | "createdAt" | "updatedAt">
 
 const createPost = async ({ title, text, userId }: CreatePostParams): Promise<posts> => {
   const result = await postRepository.create({ title, text, userId });

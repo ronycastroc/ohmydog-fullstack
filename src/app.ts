@@ -7,6 +7,7 @@ import {
   userRouter,
   postRouter
 } from "@/routers";
+import { starRouter } from "./routers/star.router";
 
 loadEnv();
 
@@ -18,7 +19,8 @@ app
   .use("/sign-up", userRouter)
   .use("/sign-in", authRouter)
   .use("/dogs", dogRouter)
-  .use("/posts", postRouter);
+  .use("/posts", postRouter)
+  .use("/stars", starRouter);
 
 export const init = (): Promise<Express> => {
   connectDb();
