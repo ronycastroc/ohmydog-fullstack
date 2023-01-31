@@ -7,8 +7,26 @@ const create = async (data: Prisma.commentsUncheckedCreateInput) => {
   });
 };
 
+const findById = async (commentId: number) => {
+  return prisma.comments.findFirst({
+    where: {
+      id: commentId
+    }
+  });
+};
+
+const deleteComment = async (commentId: number) => {
+  return prisma.comments.delete({
+    where: {
+      id: commentId,
+    }
+  });
+};
+
 const commentRepository = {
   create,
+  deleteComment,
+  findById,
 };
 
 export default commentRepository;
