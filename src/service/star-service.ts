@@ -15,8 +15,19 @@ const createStar = async (postId: number, userId: number): Promise<stars> => {
   return result;
 };
 
+const deleteStar = async (postId: number, userId: number) => {
+  await postService.readPostById(postId);
+
+  const starExists = await starRepository.readByPostUserId(postId, userId);
+
+  if (!starExists) throw requestError("StarDoesntExists");
+
+  await starRepository.deleteStar(starExists.id);
+};
+
 const starService = {
   createStar,
+  deleteStar
 };
 
 export default starService;

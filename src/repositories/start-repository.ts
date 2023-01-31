@@ -16,9 +16,18 @@ const readByPostUserId = async (postId: number, userId: number) => {
   });
 };
 
+const deleteStar = async (starId: number) => {
+  return prisma.stars.delete({
+    where: {
+      id: starId,
+    }
+  });
+};
+
 const starRepository = {
   create,
-  readByPostUserId
+  readByPostUserId,
+  deleteStar
 };
 
 export default starRepository;

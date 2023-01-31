@@ -21,3 +21,23 @@ export const postStar = async (req: AuthenticatedRequest, res: Response) => {
     return res.status(httpStatus.BAD_REQUEST).send(error.message);
   }
 };
+
+export const deleteStar = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const { postId } = req.params;
+    const { userId } = req;
+
+    await starService.deleteStar(Number(postId), userId);
+
+    res.sendStatus(httpStatus.OK);
+  } catch (error) {
+    if (error.message === "NotFound") {
+      return res.status(httpStatus.NOT_FOUND).send(error.message);
+    }
+    if (error.message === "StarDoesntExists") {
+      return res.status(httpStatus.UNAUTHORIZED).send(error.message);
+    }
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
+  }
+};
+
