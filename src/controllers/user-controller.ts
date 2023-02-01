@@ -8,9 +8,15 @@ export const postUser = async (req: Request, res: Response) => {
   try {
     new URL(urlImage);
 
-    await userService.createUser({ name, email, password, urlImage, accountType });
+    const result = await userService.createUser({ name, email, password, urlImage, accountType });
 
-    return res.sendStatus(httpStatus.CREATED);
+    return res.status(httpStatus.CREATED).send({
+      id: result.id,
+      name: result.name,
+      email: result.email,
+      accountType: result.accountType,
+      urlImage: result.urlImage, 
+    });
   } catch (error) {
     if (error.message === "DuplicatedEmailError") {
       return res.status(httpStatus.CONFLICT).send(error.message);
