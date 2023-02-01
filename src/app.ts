@@ -7,7 +7,8 @@ import {
   userRouter,
   postRouter,
   starRouter,
-  commentRouter
+  commentRouter,
+  adoptionRouter
 } from "@/routers";
 
 loadEnv();
@@ -22,7 +23,8 @@ app
   .use("/dogs", dogRouter)
   .use("/posts", postRouter)
   .use("/stars", starRouter)
-  .use("/comments", commentRouter);
+  .use("/comments", commentRouter)
+  .use("/adoptions", adoptionRouter);
 
 export const init = (): Promise<Express> => {
   connectDb();

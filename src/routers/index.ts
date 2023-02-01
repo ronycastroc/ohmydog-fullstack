@@ -4,3 +4,4 @@ export * from "./dog-router";
 export * from "./post-router";
 export * from "./star.router";
 export * from "./comment-router";
+export * from "./adoption-router";
