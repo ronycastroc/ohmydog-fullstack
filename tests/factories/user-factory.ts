@@ -12,7 +12,7 @@ export const createUser = async (params: Partial<users> = {}): Promise<users> =>
       name: faker.name.firstName(),
       email: params.email || faker.internet.email(),
       password: hashPassword,
-      accountType: accounts.Apoiador,
+      accountType: params.accountType || accounts.Apoiador,
       urlImage: faker.internet.url()
     },
   });

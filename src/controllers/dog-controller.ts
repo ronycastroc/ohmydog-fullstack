@@ -14,7 +14,7 @@ export const postDog = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(httpStatus.CREATED).send(result);
   } catch (error) {
-    if (error.message === "AccountTypeIsNotAuthorized") {
+    if (error.message === "AccountTypeUnauthorized") {
       return res.status(httpStatus.UNAUTHORIZED).send(error.message);
     }
     return res.status(httpStatus.BAD_REQUEST).send(error.message);
@@ -85,7 +85,7 @@ export const deleteDog = async (req: AuthenticatedRequest, res: Response) => {
     if (error.message === "NotFound") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);
     }
-    if (error.message === "AccountTypeIsNotAuthorized") {
+    if (error.message === "AccountTypeUnauthorized") {
       return res.status(httpStatus.UNAUTHORIZED).send(error.message);
     }
     return res.status(httpStatus.BAD_REQUEST).send(error.message);
