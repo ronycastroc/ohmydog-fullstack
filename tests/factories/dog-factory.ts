@@ -10,7 +10,7 @@ export const createDog = async (params: Partial<dogs> = {}): Promise<dogs> => {
       genre: genres.Macho,
       description: faker.lorem.word(),
       urlImage: faker.internet.url(),
-      userId: params.userId || faker.datatype.number( { min: Infinity })
+      userId: params.userId,
     },
   });
 };

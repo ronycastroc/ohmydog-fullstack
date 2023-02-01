@@ -4,10 +4,9 @@ import { faker } from "@faker-js/faker";
 import httpStatus from "http-status";
 import * as jwt from "jsonwebtoken";
 import supertest from "supertest";
-import { accounts, ages, genres } from "@prisma/client";
 import { createUser } from "../factories";
 import { cleanDb, generateValidToken } from "../helpers";
-import { createDog } from "../factories/dog-factory";
+import { createPost } from "../factories/post-factory";
 
 beforeAll(async () => {
   await init();
@@ -92,5 +91,32 @@ describe("POST /posts", () => {
         updatedAt: expect.any(String),
       });
     });
+  });
+});
+
+describe("GET /posts", () => {
+  it("should respond with status 200 and posts data", async () => {
+    const user = await createUser();
+    await generateValidToken(user);
+    const post = await createPost({ userId: user.id });
+
+    const response = await server.get("/posts");
+
+    expect(response.status).toBe(httpStatus.OK);
+    expect(response.body).toEqual([
+      {
+        id: post.id,
+        userId: post.userId,
+        title: post.title,
+        text: post.text,
+        isUpdated: post.isUpdated,
+        createdAt: post.createdAt.toISOString(),
+        updatedAt: post.updatedAt.toISOString(),
+        _count: {
+          comments: 0,
+          stars: 0,
+        }
+      }
+    ]);
   });
 });
