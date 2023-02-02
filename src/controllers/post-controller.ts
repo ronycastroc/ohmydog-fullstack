@@ -51,7 +51,7 @@ export const updatePost = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(httpStatus.OK).send(result);
   } catch (error) {
-    if (error.message === "NotFound") {
+    if (error.message === "NotFoundError") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);
     }
     if (error.message === "UnauthorizedUser") {
@@ -70,7 +70,7 @@ export const deletePost = async (req: AuthenticatedRequest, res: Response) => {
 
     res.sendStatus(httpStatus.OK);
   } catch (error) {
-    if (error.message === "NotFound") {
+    if (error.message === "NotFoundError") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);
     }
     if (error.message === "UnauthorizedUser") {
