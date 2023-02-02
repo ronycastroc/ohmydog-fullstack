@@ -13,7 +13,7 @@ export const postStar = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(httpStatus.CREATED).send(result);
   } catch (error) {
-    if (error.message === "NotFound") {
+    if (error.message === "NotFoundError") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);
     }
     if (error.message === "StarAlreadyExists") {
