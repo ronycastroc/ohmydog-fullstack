@@ -7,7 +7,7 @@ export const createComment = async (params: Partial<comments> = {}): Promise<com
     data: {
       postId: params.postId,
       userId: params.userId,
-      comment: faker.lorem.text(),
+      comment: faker.lorem.word(),
     },
   });
 };

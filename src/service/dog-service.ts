@@ -31,7 +31,7 @@ const readDogs = async (): Promise<dogs[]> => {
 const readDogById = async (dogId: number): Promise<dogs> => {
   const result = await dogRepository.readById(dogId);
 
-  if (!result) throw requestError("NotFound");
+  if (!result) throw requestError("NotFoundError");
 
   return result;
 };

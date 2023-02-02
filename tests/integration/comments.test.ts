@@ -67,7 +67,7 @@ describe("POST /comments/:postIdParams", () => {
       const user = await createUser();
       const token = await generateValidToken(user);
       await createPost({ userId: user.id });
-      const body = { comment: faker.lorem.text() };
+      const body = { comment: faker.lorem.word() };
 
       const response = await server.post("/comments/0").set("Authorization", `Bearer ${token}`).send(body);
   
@@ -78,7 +78,7 @@ describe("POST /comments/:postIdParams", () => {
       const user = await createUser();
       const token = await generateValidToken(user);
       const post = await createPost({ userId: user.id });
-      const body = { comment: faker.lorem.text() };
+      const body = { comment: faker.lorem.word() };
 
       const beforeCount = await prisma.comments.count();
 

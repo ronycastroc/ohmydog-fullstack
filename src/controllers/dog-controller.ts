@@ -39,7 +39,7 @@ export const getDog = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(httpStatus.OK).send(result);
   } catch (error) {
-    if (error.message === "NotFound") {
+    if (error.message === "NotFoundError") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);
     }
     return res.status(httpStatus.BAD_REQUEST).send(error.message);
@@ -63,7 +63,7 @@ export const updateDog = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(httpStatus.OK).send(result);
   } catch (error) {
-    if (error.message === "NotFound") {
+    if (error.message === "NotFoundError") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);
     }
     if (error.message === "AccountTypeUnauthorized") {
@@ -82,7 +82,7 @@ export const deleteDog = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
-    if (error.message === "NotFound") {
+    if (error.message === "NotFoundError") {
       return res.status(httpStatus.NOT_FOUND).send(error.message);
     }
     if (error.message === "AccountTypeUnauthorized") {
