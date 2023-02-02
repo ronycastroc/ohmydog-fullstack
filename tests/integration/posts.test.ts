@@ -4,9 +4,8 @@ import { faker } from "@faker-js/faker";
 import httpStatus from "http-status";
 import * as jwt from "jsonwebtoken";
 import supertest from "supertest";
-import { createUser } from "../factories";
+import { createUser, createPost } from "../factories";
 import { cleanDb, generateValidToken } from "../helpers";
-import { createPost } from "../factories/post-factory";
 
 beforeAll(async () => {
   await init();

@@ -5,9 +5,8 @@ import httpStatus from "http-status";
 import * as jwt from "jsonwebtoken";
 import supertest from "supertest";
 import { accounts, ages, genres } from "@prisma/client";
-import { createUser } from "../factories";
+import { createUser, createDog } from "../factories";
 import { cleanDb, generateValidToken } from "../helpers";
-import { createDog } from "../factories/dog-factory";
 
 beforeAll(async () => {
   await init();
