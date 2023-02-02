@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 import httpStatus from "http-status";
 import * as jwt from "jsonwebtoken";
 import supertest from "supertest";
-import { createUser, createPost, createStar } from "../factories";
+import { createUser, createPost, createComment } from "../factories";
 import { cleanDb, generateValidToken } from "../helpers";
 
 beforeAll(async () => {
@@ -63,7 +63,6 @@ describe("POST /comments/:postIdParams", () => {
       expect(response.status).toBe(httpStatus.UNPROCESSABLE_ENTITY);
     });
 
-
     it("should respond with status 404 when for invalid post id", async () => {
       const user = await createUser();
       const token = await generateValidToken(user);
@@ -101,3 +100,71 @@ describe("POST /comments/:postIdParams", () => {
     });
   });
 });
+
+describe("DELETE /comments/:commentId", () => {
+  it("should respond with status 401 if no token is given", async () => {
+    const response = await server.delete("/comments/1");
+
+    expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+  });
+
+  it("should respond with status 401 if given token is not valid", async () => {
+    const token = faker.lorem.word();
+
+    const response = await server.delete("/comments/1").set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+  });
+
+  it("should respond with status 401 if there is no session for given token", async () => {
+    const userWithoutSession = await createUser();
+    const token = jwt.sign({ userId: userWithoutSession.id }, process.env.JWT_SECRET);
+
+    const response = await server.delete("/comments/1").set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+  });
+
+  describe("when token is valid", () => {
+    it("should respond with status 404 when for invalid comment id", async () => {
+      const user = await createUser();
+      const token = await generateValidToken(user);
+      const post = await createPost({ userId: user.id });
+      await createComment({ userId: user.id, postId: post.id });
+
+      const response = await server.delete("/comments/0").set("Authorization", `Bearer ${token}`);
+  
+      expect(response.status).toBe(httpStatus.NOT_FOUND);
+    });
+    
+    it("should respond with status 401 when comment is not from the user", async () => {
+      const user = await createUser();
+      const user2 = await createUser();
+      const token = await generateValidToken(user);
+      const post = await createPost({ userId: user.id });
+      const comment = await createComment({ userId: user2.id, postId: post.id });      
+  
+      const response = await server.delete(`/comments/${comment.id}`).set("Authorization", `Bearer ${token}`);
+  
+      expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+    });
+
+    it("should respond with status 200 and delete comment in database", async () => {
+      const user = await createUser();
+      const token = await generateValidToken(user);
+      const post = await createPost({ userId: user.id });
+      const comment = await createComment({ userId: user.id, postId: post.id });
+
+      const beforeCount = await prisma.comments.count();
+
+      const response = await server.delete(`/comments/${comment.id}`).set("Authorization", `Bearer ${token}`);
+
+      const afterCount = await prisma.comments.count();
+
+      expect(response.status).toBe(httpStatus.OK);
+      expect(beforeCount).toEqual(1);
+      expect(afterCount).toEqual(0);
+    });
+  });
+});
+
