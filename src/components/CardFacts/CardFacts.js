@@ -14,7 +14,7 @@ export const CardFacts = () => {
         const facts = await getDogFact();
   
         setDogPic(pictures.message);
-        setDogFact(facts.facts[0]);
+        setDogFact(facts.facts[0]);        
       } catch (error) {
         console.log(error.message);
       }
@@ -28,9 +28,9 @@ export const CardFacts = () => {
         try {      
           const pictures = await getDogPic();
           const facts = await getDogFact();
-    
+  
           setDogPic(pictures.message);
-          setDogFact(facts.facts[0]);
+          setDogFact(facts.facts[0]);   
         } catch (error) {
           console.log(error.message);
         }
@@ -46,16 +46,17 @@ export const CardFacts = () => {
   return (
     <Wrapper>
       <img src={dogPic} alt="" />
-      <h1>Você Sabia?</h1>
+      <h1>Did you know?</h1>
       <p>{dogFact}</p>
     </Wrapper>
   );
 };
 
+
 const Wrapper = styled.div`
   background-color: var(--white-color);
-  width: 30vw;
-  height: 90vh;
+  width: 25vw;
+  min-height: 50vh;
   border-radius: 40px;
   display: flex;
   flex-direction: column;
@@ -71,14 +72,15 @@ const Wrapper = styled.div`
   p {
     padding: 15px 20px;
     color: var(--dark-color);
+    font-size: 1.1rem;
   }
 
   img {
-    width: 90%;
-    height: 400px;
+    width: 80%;
+    height: 50%;
     object-fit: cover;
     border-radius: 40px;
     margin: 0 auto;
-    padding-top: 20px;
+    margin-top: 20px;    
   }
 `;

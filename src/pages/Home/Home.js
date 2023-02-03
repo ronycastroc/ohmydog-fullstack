@@ -8,8 +8,9 @@ export const Home = () => {
       <Logo />
       <Cards>
         <MainCard />
-        <CardFacts />
+        <CardFacts />        
       </Cards>
+      
         
     </>
   );
@@ -18,6 +19,7 @@ export const Home = () => {
 const Cards = styled.div`
   display: flex;
   justify-content: space-around;
+  align-items: center;
 `;
 
 

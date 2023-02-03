@@ -4,16 +4,16 @@ export const Header = () => {
   return (
     <Wrapper>
       <div>
-        <h2>AdoteDog</h2>
+        <h2>AdoptDog</h2>
       </div>
       <div>
         <h2>PostsMyDog</h2>
       </div>
       <div>
-        <h2>Seja um Apoiador</h2>
+        <h2>Be a Supporter</h2>
       </div>
       <div>
-        <h2>Histórias</h2>
+        <h2>Stories</h2>
       </div>
       <div>
         <h2>Login</h2>
