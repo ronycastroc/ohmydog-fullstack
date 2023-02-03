@@ -17,7 +17,7 @@ export const Home = () => {
 
 const Cards = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 `;
 
 

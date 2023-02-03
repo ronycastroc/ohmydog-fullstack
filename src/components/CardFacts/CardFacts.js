@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getDogPic } from "../../services/getDogPic";
+import { getDogFact, getDogPic } from "../../services";
+
 
 export const CardFacts = () => {
   const [dogPic, setDogPic] = useState();
+  const [dogFact, setDogFact] = useState();
   
   useEffect(() => {
     const fetchData = async () => {
       try {      
-        const response = await getDogPic();
+        const pictures = await getDogPic();
+        const facts = await getDogFact();
   
-        setDogPic(response.message);
+        setDogPic(pictures.message);
+        setDogFact(facts.facts[0]);
       } catch (error) {
         console.log(error.message);
       }
@@ -22,9 +26,11 @@ export const CardFacts = () => {
     const intervalId = setInterval(() => {
       const fetchData = async () => {
         try {      
-          const response = await getDogPic();
+          const pictures = await getDogPic();
+          const facts = await getDogFact();
     
-          setDogPic(response.message);
+          setDogPic(pictures.message);
+          setDogFact(facts.facts[0]);
         } catch (error) {
           console.log(error.message);
         }
@@ -39,18 +45,20 @@ export const CardFacts = () => {
 
   return (
     <Wrapper>
-      <h1>Você Sabia?</h1>
       <img src={dogPic} alt="" />
+      <h1>Você Sabia?</h1>
+      <p>{dogFact}</p>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   background-color: var(--white-color);
-  width: 40vw;
-  min-height: 230px;
+  width: 30vw;
+  height: 90vh;
   border-radius: 40px;
-  position: relative;
+  display: flex;
+  flex-direction: column;
 
   h1 {
     font-weight: 700;
@@ -66,12 +74,11 @@ const Wrapper = styled.div`
   }
 
   img {
-    width: 300px;
-    height: 330px;
+    width: 90%;
+    height: 400px;
     object-fit: cover;
     border-radius: 40px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    margin: 0 auto;
+    padding-top: 20px;
   }
 `;
