@@ -24,12 +24,15 @@ export const Header = () => {
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 4rem;
-  background-color: var(--black-color);
+  height: 60px;
+  background-color: var(--dark-color);
   border-bottom-left-radius: 40px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
 
   div {
     
@@ -38,5 +41,6 @@ const Wrapper = styled.div`
   h2 {
     color: var(--white-color);
     font-size: 1.1rem;
+    font-weight: 500;
   }
 `;
