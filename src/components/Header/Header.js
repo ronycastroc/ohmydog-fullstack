@@ -1,22 +1,34 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Header = () => {
   return (
     <Wrapper>
       <div>
-        <h2>AdoptDog</h2>
+        <Link to="/adopt-dog">
+          AdoptDog
+        </Link>
+        <h2></h2>
       </div>
       <div>
-        <h2>PostsMyDog</h2>
+        <Link to="/posts-mydog">
+          PostsMyDog
+        </Link>
       </div>
       <div>
-        <h2>Be a Supporter</h2>
+        <Link to="/be-a-supporter">
+          Be a Supporter
+        </Link>
       </div>
       <div>
-        <h2>Stories</h2>
+        <Link to="/stories">
+          Stories
+        </Link>
       </div>
       <div>
-        <h2>Login</h2>
+        <Link to="/sign-up">
+          Login
+        </Link>
       </div>
     </Wrapper>
   );
@@ -36,9 +48,10 @@ const Wrapper = styled.div`
   z-index: 1;
   opacity: 0.95;
 
-  h2 {
+  a {
     color: var(--white-color);
     font-size: 1.1rem;
     font-weight: 500;
+    text-decoration: none;
   }
 `;

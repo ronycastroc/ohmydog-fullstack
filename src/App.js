@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Footer, Header } from "./components";
-import { Home } from "./pages";
+import { AdoptDog, Home } from "./pages";
 
 export const App = () => {
   return (
@@ -9,6 +9,7 @@ export const App = () => {
         <Header/>
         <Routes>
           <Route path="/" element={<Home />}/>
+          <Route path="/adopt-dog" element={<AdoptDog />}/>
         </Routes>
         <Footer />      
       </BrowserRouter>     

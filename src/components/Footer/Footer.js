@@ -2,12 +2,14 @@ import styled from "styled-components";
 import omdLogo from "../../assets/images/ohmydog-underline.png";
 import { BsInstagram, BsFacebook, BsTwitter, BsYoutube } from "react-icons/bs";
 import { IconContext } from "react-icons";
+import { useNavigate } from "react-router-dom";
 
 export const Footer = () => {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <SocialMedia>
-        <img src={omdLogo} alt="" />
+        <img src={omdLogo} alt="" onClick={() => { navigate("/"); }}/>
         <IconContext.Provider value={{
           color: "var(--white-color)",
           className: "global-class-name",
@@ -32,6 +34,9 @@ const Wrapper = styled.div`
   background-color: var(--dark-color);
   border-top-right-radius: 100px;
   margin-top: 100px;
+  position: relative;
+  bottom: 0;
+  left: 0;
 `;
 
 const SocialMedia = styled.div`
@@ -45,6 +50,7 @@ const SocialMedia = styled.div`
   img {
     width: 12.5vw;
     color: var(--white-color);
+    cursor: pointer;
   }
 
   div {
