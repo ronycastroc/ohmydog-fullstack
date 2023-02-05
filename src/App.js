@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Header } from "./components";
+import { Footer, Header } from "./components";
 import { Home } from "./pages";
 
 export const App = () => {
@@ -9,7 +9,8 @@ export const App = () => {
         <Header/>
         <Routes>
           <Route path="/" element={<Home />}/>
-        </Routes>      
+        </Routes>
+        <Footer />      
       </BrowserRouter>     
     </>
   );

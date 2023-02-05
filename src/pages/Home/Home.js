@@ -9,17 +9,15 @@ export const Home = () => {
       <Cards>
         <MainCard />
         <CardFacts />        
-      </Cards>
-      
-        
+      </Cards>       
     </>
   );
 };
 
 const Cards = styled.div`
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  position: relative;
 `;
 
 

@@ -35,6 +35,7 @@ const Wrapper = styled.div`
   width: 60vw;
   border-radius: 40px;
   margin-bottom: 30px;
+  margin-left: 50px;
 
   h1 {
     font-weight: 700;

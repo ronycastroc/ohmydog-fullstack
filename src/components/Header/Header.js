@@ -33,10 +33,8 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-
-  div {
-    
-  }
+  z-index: 1;
+  opacity: 0.95;
 
   h2 {
     color: var(--white-color);

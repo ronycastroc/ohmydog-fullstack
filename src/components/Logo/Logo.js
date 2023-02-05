@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ohmydog from "../../assets/images/ohmydog.png";
+import ohmydog from "../../assets/images/ohmydog-logo.png";
 
 export const Logo = () => {
   return (

@@ -56,10 +56,13 @@ export const CardFacts = () => {
 const Wrapper = styled.div`
   background-color: var(--white-color);
   width: 25vw;
-  min-height: 50vh;
+  max-height: 100%;
   border-radius: 40px;
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 50px;
 
   h1 {
     font-weight: 700;
@@ -76,8 +79,8 @@ const Wrapper = styled.div`
   }
 
   img {
-    width: 80%;
-    height: 50%;
+    width: 22vw;
+    height: 40vh;
     object-fit: cover;
     border-radius: 40px;
     margin: 0 auto;
