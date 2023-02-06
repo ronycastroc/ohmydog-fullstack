@@ -4,3 +4,4 @@ export * from "./MainCard/MainCard";
 export * from "./CardFacts/CardFacts";
 export * from "./Footer/Footer";
 export * from "./AdoptCard/AdoptCard";
+export * from "./Buttton/Button";
