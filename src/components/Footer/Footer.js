@@ -29,7 +29,7 @@ export const Footer = () => {
 };
 
 const Wrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 150px;
   background-color: var(--dark-color);
   border-top-right-radius: 100px;

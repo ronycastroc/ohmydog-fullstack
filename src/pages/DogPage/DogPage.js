@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Logo } from "../../components";
 import { getDogById } from "../../services";
+import { postAdoption } from "../../services/adoptionApi";
+import { toast } from "react-toastify";
 
 export const DogPage = () => {
   const [dog, setDog] = useState({});
+  const [name, setName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [profession, setProfession] = useState("");
+  const [textAdoption, setTextAdoption] = useState("");
+  const [textTravel, setTextTravel] = useState("");
+
   const { dogId } = useParams();
+  const navigate = useNavigate();
 
   const getDogByIdFunc = async () => {
     try {
@@ -22,6 +32,35 @@ export const DogPage = () => {
     getDogByIdFunc();
   }, []);
 
+  const postAdoptionDog = async (e) => {
+    e.preventDefault();
+
+    try {
+      await postAdoption(dogId);
+
+      toast.success("The form was sent successfully, check your email for more details.", {
+        autoClose: 10000
+      });
+      resetForm();
+      navigate("/");
+    } catch (error) {
+      if (error.response.status === 401) {
+        return toast.error("You are already in a review, please check your email.");
+      }
+      return toast.error("Something went wrong, please try again later.");
+    }
+  };
+
+  const resetForm = () => {
+    setDog("");
+    setName("");
+    setBirthday("");
+    setPhoneNumber("");
+    setProfession("");
+    setTextAdoption("");
+    setTextTravel("");
+  };
+
   return (
     <>
       <Logo />
@@ -33,25 +72,59 @@ export const DogPage = () => {
           <div><span className="title">Age: </span><span>{dog.age}</span></div> 
           <div><span className="title">Genre: </span><span>{dog.genre}</span></div>
 
-          <Form>
-            <input type="text" name="name" placeholder="Full Name" required/>
-            <input type="text" name="bithday" placeholder="Birthday" onChange={(e) => console.log(e.target.value)}
+          <Form onSubmit={postAdoptionDog}>
+            <input 
+              type="text" 
+              name="name" 
+              placeholder="Full Name" 
+              value={name}
+              onChange={(e) => setName(e.target.value)}  
+              required/>
+            <input 
+              type="text" 
+              name="bithday" 
+              placeholder="Birthday"
+              value={birthday} 
+              onChange={(e) => setBirthday(e.target.value)}
               onFocus={(e) => (e.target.type = "date")}
-              onBlur={(e) => (e.target.type = "text")} required/>
-            <input type="number" name="cell phone" placeholder="Phone Number" required/>
-            <input type="text" name="profession" placeholder="Profession" required/>
+              onBlur={(e) => (e.target.type = "text")} 
+              required/>
+            <input 
+              type="number" 
+              name="cell phone" 
+              placeholder="Phone Number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)} 
+              required/>
+            <input 
+              type="text" 
+              name="profession" 
+              placeholder="Profession"
+              value={profession}
+              onChange={(e) => setProfession(e.target.value)}
+              required/>
 
             <h1>Why do you want to adopt an dog?</h1>
-            <textarea type="text" name="why" className="why-adopt" required/>
+            <textarea 
+              type="text" 
+              name="why" 
+              className="why-adopt"
+              value={textAdoption}
+              onChange={(e) => setTextAdoption(e.target.value)} 
+              required/>
 
             <h1>In case of travel, where will you leave the adopted dog?</h1>
-            <textarea type="text" name="why" className="why-adopt" required/>
+            <textarea 
+              type="text" 
+              name="why" 
+              className="why-adopt"
+              value={textTravel}
+              onChange={(e) => setTextTravel(e.target.value)} 
+              required/>
 
-            <div>
-              <Button>
-                Send Form
-              </Button>
-            </div>
+            <Button>
+              Send Form
+            </Button>          
           </Form>         
         </DogForm>
       </Wrapper>
@@ -98,7 +171,7 @@ const DogForm = styled.div`
   }
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   width: 100%;
   padding-top: 10px;
   padding-bottom: 20px;
@@ -108,10 +181,11 @@ const Form = styled.div`
 
   input {
     width: 90%;
-    height: 30px;
+    height: 40px;
     border-radius: 10px;
     margin-bottom: 10px;
     padding-left: 5px;
+    border: 1px solid var(--black-color);
   }
 
   input[type="number"]::-webkit-inner-spin-button {
@@ -122,8 +196,9 @@ const Form = styled.div`
     width: 90%;
     height: 100px;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     padding-left: 5px;
     padding-top: 5px;
+    border: 1px solid var(--black-color);
   }
 `;

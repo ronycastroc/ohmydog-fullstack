@@ -8,7 +8,7 @@ export const Button = ({ children }) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
   background-color: var(--buttom-color);
   width: auto;
   height: 40px;
@@ -28,6 +28,8 @@ const Wrapper = styled.div`
     font-weight: 500;
     text-align:center; 
     vertical-align: middle;
-    display: table-cell;   
+    display: table-cell;
+    font-family: 'Roboto Slab', serif;
+    font-size: 0.9rem;
   }
 `;

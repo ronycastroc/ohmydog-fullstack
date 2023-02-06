@@ -7,7 +7,7 @@ export const Logo = () => {
 
   return (
     <Image onClick={() => { navigate("/"); }}>
-      <img src={ohmydog} alt="" />
+      <img src={ohmydog} alt="logo" />
     </Image>  
   );
 };
