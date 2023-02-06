@@ -1,11 +1,11 @@
 -- CreateEnum
-CREATE TYPE "accounts" AS ENUM ('Membro', 'Apoiador', 'Veterinario');
+CREATE TYPE "accounts" AS ENUM ('Member', 'Supporter', 'Veterinary');
 
 -- CreateEnum
-CREATE TYPE "ages" AS ENUM ('Filhote', 'Adolescente', 'Adulto', 'Idoso');
+CREATE TYPE "ages" AS ENUM ('Puppy', 'Adolescent', 'Adult', 'Elderly');
 
 -- CreateEnum
-CREATE TYPE "genres" AS ENUM ('Macho', 'Femea');
+CREATE TYPE "genres" AS ENUM ('Male', 'Female');
 
 -- CreateTable
 CREATE TABLE "adoptionForms" (
@@ -51,9 +51,9 @@ CREATE TABLE "posts" (
     "userId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "text" TEXT NOT NULL,
+    "isUpdated" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "isUpdated" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "posts_pkey" PRIMARY KEY ("id")
 );

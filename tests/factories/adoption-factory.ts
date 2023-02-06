@@ -1,4 +1,4 @@
-import { adoptionForms, comments } from "@prisma/client";
+import { adoptionForms } from "@prisma/client";
 import { prisma } from "@/config";
 
 export const createAdoption = async (params: Partial<adoptionForms> = {}): Promise<adoptionForms> => {

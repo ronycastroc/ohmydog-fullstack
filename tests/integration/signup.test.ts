@@ -48,7 +48,7 @@ describe("POST /sign-up", () => {
       name: faker.name.firstName(),
       email: faker.internet.email(),
       password: faker.internet.password(6),
-      accountType: accounts.Apoiador,
+      accountType: accounts.Supporter,
       urlImage: faker.lorem.text()
     };
 
@@ -62,7 +62,7 @@ describe("POST /sign-up", () => {
       name: faker.name.firstName(),
       email: faker.internet.email(),
       password: faker.internet.password(6),
-      accountType: accounts.Apoiador,
+      accountType: accounts.Supporter,
       urlImage: faker.internet.url()
     });
 

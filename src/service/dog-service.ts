@@ -72,7 +72,7 @@ const deleteDog = async (dogId: number, userId: number) => {
 const verifyAccountType = async (userId: number) => {
   const isUserSupporter = await userRepository.findById(userId, { id: true, accountType: true });
 
-  if (isUserSupporter.accountType !== "Apoiador") throw requestError("AccountTypeUnauthorized");
+  if (isUserSupporter.accountType !== "Supporter") throw requestError("AccountTypeUnauthorized");
 };
 
 const dogService = {

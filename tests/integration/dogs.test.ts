@@ -20,8 +20,8 @@ const server = supertest(app);
 
 const generateValidBody = () => ({
   name: faker.name.firstName(),
-  age: ages.Filhote,
-  genre: genres.Macho,
+  age: ages.Puppy,
+  genre: genres.Male,
   description: faker.lorem.word(),
   urlImage: faker.internet.url(),
 });
@@ -75,8 +75,8 @@ describe("POST /dogs", () => {
       const token = await generateValidToken(user);
       const urlImageInvalid = { 
         name: faker.name.firstName(),
-        age: ages.Filhote,
-        genre: genres.Macho,
+        age: ages.Puppy,
+        genre: genres.Male,
         description: faker.lorem.word(),
         urlImage: faker.lorem.text()
       };
@@ -87,7 +87,7 @@ describe("POST /dogs", () => {
     });
 
     it("should respond with status 401 when body is valid but account type is not valid", async () => {
-      const user = await createUser({ accountType: accounts.Membro });
+      const user = await createUser({ accountType: accounts.Member });
       const token = await generateValidToken(user);
       const validBody = generateValidBody();
   
@@ -260,8 +260,8 @@ describe("PUT /dogs/:dogId", () => {
       const dog = await createDog({ userId: user.id });
       const urlImageInvalid = { 
         name: faker.name.firstName(),
-        age: ages.Filhote,
-        genre: genres.Macho,
+        age: ages.Puppy,
+        genre: genres.Male,
         description: faker.lorem.word(),
         urlImage: faker.lorem.text()
       };
@@ -284,7 +284,7 @@ describe("PUT /dogs/:dogId", () => {
 
     it("should respond with status 401 when body is valid but account type is not valid", async () => {
       const user = await createUser();
-      const user2 = await createUser({ accountType: accounts.Membro });
+      const user2 = await createUser({ accountType: accounts.Member });
       const token = await generateValidToken(user2);
       const dog = await createDog({ userId: user.id });
       const dogBody = generateValidBody();
@@ -355,7 +355,7 @@ describe("DELETE /dogs/:dogId", () => {
     
     it("should respond with status 401 when account type is not valid", async () => {
       const user = await createUser();
-      const user2 = await createUser({ accountType: accounts.Membro });
+      const user2 = await createUser({ accountType: accounts.Member });
       const token = await generateValidToken(user2);
       const dog = await createDog({ userId: user.id });      
   

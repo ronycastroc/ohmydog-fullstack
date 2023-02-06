@@ -38,8 +38,8 @@ model dogs {
   userId        Int
   createdAt     DateTime        @default(now()) @db.Timestamptz(6)
   updatedAt     DateTime        @default(now()) @db.Timestamptz(6)
-  users         users           @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   adoptionForms adoptionForms[]
+  users         users           @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model posts {
@@ -47,11 +47,11 @@ model posts {
   userId    Int
   title     String
   text      String
+  isUpdated Boolean    @default(false)
   createdAt DateTime   @default(now()) @db.Timestamptz(6)
   updatedAt DateTime   @default(now()) @db.Timestamptz(6)
-  isUpdated Boolean    @default(false)
-  users     users      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   comments  comments[]
+  users     users      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   stars     stars[]
 }
 
@@ -92,19 +92,19 @@ model users {
 }
 
 enum accounts {
-  Membro
-  Apoiador
-  Veterinario
+  Member
+  Supporter
+  Veterinary
 }
 
 enum ages {
-  Filhote
-  Adolescente
-  Adulto
-  Idoso
+  Puppy
+  Adolescent
+  Adult
+  Elderly
 }
 
 enum genres {
-  Macho
-  Femea
+  Male
+  Female
 }
