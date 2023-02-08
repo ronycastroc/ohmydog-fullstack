@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import styled from "styled-components";
 import { Button, Logo } from "../../components";
 import { postSignIn } from "../../services";
+import { Form, Wrapper } from "./style";
 
 export const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ export const SignIn = () => {
 
   const navigate = useNavigate();
 
-  const handleForm = async (e) => {
+  const handleForm = useCallback(async (e) => {
     e.preventDefault();
 
     const body = {
@@ -23,7 +23,7 @@ export const SignIn = () => {
       const user = await postSignIn(body);
 
       localStorage.setItem("token", JSON.stringify(user.token));
-      localStorage.setItem("name", JSON.stringify(user.user.name));
+      localStorage.setItem("user", JSON.stringify(user.user));
       resetForm();
       navigate("/");
     } catch (error) {
@@ -34,7 +34,7 @@ export const SignIn = () => {
       resetForm();
       return toast.error("Something went wrong, please try again later.");
     }
-  };
+  }, [email, password]);
 
   const resetForm = () => {
     setEmail("");
@@ -75,55 +75,3 @@ export const SignIn = () => {
     </>
   );
 };
-
-export const Wrapper = styled.div`
-  background-color: var(--white-color);
-  max-width: 30vw;
-  min-height: 70vh;
-  margin: 0 auto;
-  margin-top: 100px;
-  border-radius: 10px;
-  position: relative;
-  padding-bottom: 100px;
-`;
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  input {
-    width: 80%;
-    height: 40px;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    padding-left: 5px;
-    margin-bottom: 20px;
-    font-weight: 500;
-  }
-
-  span {
-    color: var(--button-color);
-    cursor: pointer;
-  }
-
-  .div-link {
-    margin-top: -10px;
-  }
-  
-  button {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
-  
-  .account-type {
-    display: flex;
-    margin-bottom: 20px;
-
-    h3 {
-      margin-right: 10px;
-    }
-  }
-`;

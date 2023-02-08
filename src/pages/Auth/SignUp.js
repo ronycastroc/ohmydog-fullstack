@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Logo } from "../../components";
 import { postSignUp } from "../../services";
-import { Form, Wrapper } from "./SignIn";
+import { Form, Wrapper } from "./style";
 
 export const SignUp = () => {
   const [name, setName] = useState("");
@@ -15,7 +15,7 @@ export const SignUp = () => {
 
   const navigate = useNavigate();
 
-  const handleForm = async (e) => {
+  const handleForm = useCallback(async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -42,14 +42,26 @@ export const SignUp = () => {
 
     try {
       await postSignUp(body);
+      resetForm();
 
       navigate("/auth/sign-in");
     } catch (error) {
       if (error.response.status === 409) {
+        setEmail("");
         return toast.error("Email already registered, try another email");
       }
       return toast.error("Something went wrong, please try again later.");
     }
+
+  },[name, email, password, urlImage, accountType]);
+
+  const resetForm = () => {
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setUrlImage("");
+    setAccountType("");
   };
 
   return (
@@ -65,6 +77,7 @@ export const SignUp = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required />
+
           <input
             type="email"
             name="email"
@@ -72,6 +85,7 @@ export const SignUp = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required />
+
           <input
             type="password"
             name="password"
@@ -79,6 +93,7 @@ export const SignUp = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required />
+
           <input
             type="password"
             name="confirm-password"
@@ -86,6 +101,7 @@ export const SignUp = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required />
+
           <input
             type="url"
             name="url-image"
@@ -94,7 +110,7 @@ export const SignUp = () => {
             onChange={(e) => setUrlImage(e.target.value)}
             required />
 
-          <div className="account-type">
+          <div className="type">
             <h3>Select account type: </h3>
             <select onChange={(e) => setAccountType(e.target.value)}>
               <option value="Member">Member</option>

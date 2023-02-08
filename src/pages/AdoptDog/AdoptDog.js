@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MdMale, MdFemale } from "react-icons/md";
+import { BsPencilFill, BsTrashFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AdoptCard, Button, Logo } from "../../components";
@@ -7,6 +8,7 @@ import { getDogs } from "../../services";
 
 export const AdoptDog = () => {
   const [dogs, setDogs] = useState([]);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
 
@@ -30,11 +32,15 @@ export const AdoptDog = () => {
       <Logo />
       
       <Wrapper>
-        <AdoptCard />
         <Dogs>
           {dogs.map((value, index) => (
             <Dog key={index}>
               <img src={value.urlImage} alt="dog-image" />
+              {user?.accountType === "Supporter" ? 
+                (<div className="div-icons">
+                  <BsPencilFill className="icon"/>
+                  <BsTrashFill className="icon"/>
+                </div>) : ("")}
               <h1>{value.name}</h1>
               <h2>{value.age}</h2>
               {value.genre === "Male" ? (<MdMale className="io-male" />) : (<MdFemale className="io-female" />)}
@@ -50,6 +56,8 @@ export const AdoptDog = () => {
             </Dog>
           ))}
         </Dogs>
+
+        <AdoptCard />
       </Wrapper>
     </>
   );
@@ -81,6 +89,18 @@ const Dog = styled.div`
     object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+  }
+
+  .div-icons {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  .icon {
+    color: var(--white-color);
+    margin-left: 5px;
+    cursor: pointer;
   }
 
   h1 {
@@ -115,3 +135,5 @@ const Dog = styled.div`
     color: #e520f2;
   }  
 `;
+
+

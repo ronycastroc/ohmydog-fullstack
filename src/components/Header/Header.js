@@ -6,10 +6,8 @@ import UserContext from "../../contexts/UserContext";
 export const Header = () => {
   const { showLogout, setShowLogout } = useContext(UserContext);
 
-  const token = JSON.parse(localStorage.getItem("token"));
-  const name = JSON.parse(localStorage.getItem("name") || "null");
-
-  console.log(name);
+  const auth = JSON.parse(localStorage.getItem("token"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
 
@@ -42,8 +40,8 @@ export const Header = () => {
         </Link>
       </div>
       <div>
-        {token ?
-          (<p onClick={() => { setShowLogout(!showLogout); }}>Hello, {name} </p>) :
+        {auth ?
+          (<p onClick={() => { setShowLogout(!showLogout); }}>Hello, {user?.name} </p>) :
           (<Link to="/auth/sign-in">
             Login
           </Link>)}
@@ -94,7 +92,6 @@ const LogoutBar = styled.div`
   width: 120px;
   height: 45px;
   background-color: var(--dark-color);
-  position: absolute;
   top: 45px;
   right: 0;
   display: flex;

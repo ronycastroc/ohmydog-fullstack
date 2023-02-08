@@ -1,10 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from "../Buttton/Button";
+import { AddDogButton } from "../AddDogButton/AddDogButton";
 
 export const AdoptCard = () => {
-  const navigate = useNavigate();
-
   return (
     <DisplayCard>
       <Card>
@@ -22,11 +19,7 @@ export const AdoptCard = () => {
           Nesciunt vitae at, tempora eaque possimus amet, culpa adipisci quibusdam ab porro unde laudantium recusandae. Nisi doloribus possimus temporibus incidunt beatae quia. Eius, nam veniam. Cum esse minima nulla facere!</p>
       </Card>
 
-      <div onClick={() => { navigate("/add-dog-adoption"); }}>
-        <Button>
-          Are you a supporter? Add a dog for adoption here
-        </Button>
-      </div>
+      <AddDogButton />
     </DisplayCard>
   );
 };
@@ -44,7 +37,7 @@ const Card = styled.div`
   background-color: var(--white-color);
   width: 35vw;  
   border-radius: 10px;
-  margin-left: 40px;
+  margin-right: 30px;
   margin-bottom: 30px;
 
   h1 {

@@ -13,3 +13,10 @@ export const getDogById = async (dogId) => {
 
   return response.data;
 };
+
+export const postDog = async (body) => {
+  const config = createHeaders();
+  const response = await api.post("/dogs", body, config);
+
+  return response.data;
+};
