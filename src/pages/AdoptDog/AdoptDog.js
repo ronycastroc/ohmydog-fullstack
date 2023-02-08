@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MdMale, MdFemale } from "react-icons/md";
 import { BsPencilFill, BsTrashFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AdoptCard, Button, Logo } from "../../components";
-import { getDogs } from "../../services";
+import { deleteDog, getDogs } from "../../services";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export const AdoptDog = () => {
   const [dogs, setDogs] = useState([]);
+  const [refresh, setRefresh] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
@@ -24,8 +27,41 @@ export const AdoptDog = () => {
 
   useEffect(() => {
     getDogsFunc();
-  }, []);
+  }, [refresh]);
 
+  const deleteDogFunc = useCallback(async (dogId) => {
+    try {
+      await deleteDog(dogId);
+      setRefresh(!refresh);
+    } catch (error) {
+      if (error.response.status === 401) {
+        return toast.error("Your account type is not authorized.");
+      }
+      return toast.error("Something went wrong, please try again later.");
+    }
+  }, [refresh]);
+
+  const deleteConfirmation = (dogId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#229A00",
+      cancelButtonColor: "#D33",
+      confirmButtonText: "Yes, delete it!",
+      scrollbarPadding: false, 
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteDogFunc(dogId);
+        Swal.fire(
+          "Deleted!",
+          "Your file has been deleted.",
+          "success"
+        );
+      }
+    });
+  };
 
   return (
     <>
@@ -39,7 +75,7 @@ export const AdoptDog = () => {
               {user?.accountType === "Supporter" ? 
                 (<div className="div-icons">
                   <BsPencilFill className="icon" onClick={() => navigate(`/update-dog-adoption/${value.id}`)}/>
-                  <BsTrashFill className="icon"/>
+                  <BsTrashFill className="icon" onClick={() => deleteConfirmation(value.id)}/>
                 </div>) : ("")}
               <h1>{value.name}</h1>
               <h2>{value.age}</h2>

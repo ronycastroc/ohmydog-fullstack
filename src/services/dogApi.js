@@ -27,3 +27,10 @@ export const updateDog = async ({ dogId, body }) => {
 
   return response.data;
 };
+
+export const deleteDog = async (dogId) => {
+  const config = createHeaders();
+  const response = await api.delete(`/dogs/${dogId}`, config);
+
+  return response.data;
+};

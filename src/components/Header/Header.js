@@ -99,6 +99,7 @@ const LogoutBar = styled.div`
   align-items: center;
   border-bottom-left-radius: 50px;
   position: fixed;
+  transition: all ease .5s;
   transform: ${(props) => (props.showLogout ? "translateX(0)" : "translateX(150px)")};    
   cursor: pointer;
   z-index: 3;
