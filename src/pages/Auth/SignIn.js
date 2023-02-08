@@ -23,10 +23,12 @@ export const SignIn = () => {
       const user = await postSignIn(body);
 
       localStorage.setItem("token", JSON.stringify(user.token));
+      localStorage.setItem("name", JSON.stringify(user.user.name));
       resetForm();
       navigate("/");
     } catch (error) {
       if (error.response.status === 401) {
+        resetForm();
         return toast.error("Your email or password is incorrect, please try again.");
       }
       resetForm();
@@ -101,7 +103,7 @@ export const Form = styled.form`
   }
 
   span {
-    color: var(--buttom-color);
+    color: var(--button-color);
     cursor: pointer;
   }
 

@@ -9,7 +9,7 @@ export const Button = ({ children }) => {
 };
 
 const Wrapper = styled.button`
-  background-color: var(--buttom-color);
+  background-color: var(--button-color);
   width: auto;
   height: 35px;
   margin: 0 auto;

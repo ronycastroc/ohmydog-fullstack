@@ -5,3 +5,4 @@ export * from "./CardFacts/CardFacts";
 export * from "./Footer/Footer";
 export * from "./AdoptCard/AdoptCard";
 export * from "./Buttton/Button";
+export * from "./Overlay/Overlay";

@@ -1,7 +1,23 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import UserContext from "../../contexts/UserContext";
 
 export const Header = () => {
+  const { showLogout, setShowLogout } = useContext(UserContext);
+
+  const token = JSON.parse(localStorage.getItem("token"));
+  const name = JSON.parse(localStorage.getItem("name") || "null");
+
+  console.log(name);
+
+  const navigate = useNavigate();
+
+  const logout = () => {
+    setShowLogout(false);
+    localStorage.clear();
+    navigate("/");
+  };
   return (
     <Wrapper>
       <div>
@@ -26,17 +42,23 @@ export const Header = () => {
         </Link>
       </div>
       <div>
-        <Link to="/auth/sign-in">
-          Login
-        </Link>
+        {token ?
+          (<p onClick={() => { setShowLogout(!showLogout); }}>Hello, {name} </p>) :
+          (<Link to="/auth/sign-in">
+            Login
+          </Link>)}
       </div>
+
+      <LogoutBar showLogout={showLogout} onClick={logout}>
+        <p>Logout</p>
+      </LogoutBar>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 40px;
+  height: 45px;
   background-color: var(--dark-color);
   border-bottom-left-radius: 100px;
   display: flex;
@@ -45,7 +67,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 1;
+  z-index: 3;
   opacity: 0.95;
   
 
@@ -54,5 +76,37 @@ const Wrapper = styled.div`
     font-size: 1.1rem;
     font-weight: 500;
     text-decoration: none;
+  }
+
+  p {
+    color: var(--button-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translate(0, -50%);
+  }
+`;
+
+const LogoutBar = styled.div`
+  width: 120px;
+  height: 45px;
+  background-color: var(--dark-color);
+  position: absolute;
+  top: 45px;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 50px;
+  position: fixed;
+  transform: ${(props) => (props.showLogout ? "translateX(0)" : "translateX(150px)")};    
+  cursor: pointer;
+  z-index: 3;
+
+  p {
+    color: var(--white-color);
   }
 `;
