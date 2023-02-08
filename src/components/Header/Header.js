@@ -26,7 +26,7 @@ export const Header = () => {
         </Link>
       </div>
       <div>
-        <Link to="/sign-up">
+        <Link to="/auth/sign-in">
           Login
         </Link>
       </div>

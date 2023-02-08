@@ -25,7 +25,7 @@ const Wrapper = styled.button`
   p {
     padding-left: 10px;
     padding-right: 10px;
-    font-weight: 500;
+    font-weight: 700;
     text-align:center; 
     vertical-align: middle;
     display: table-cell;

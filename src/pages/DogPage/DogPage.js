@@ -32,7 +32,7 @@ export const DogPage = () => {
     getDogByIdFunc();
   }, []);
 
-  const postAdoptionDog = async (e) => {
+  const handleForm = async (e) => {
     e.preventDefault();
 
     try {
@@ -72,7 +72,7 @@ export const DogPage = () => {
           <div><span className="title">Age: </span><span>{dog.age}</span></div> 
           <div><span className="title">Genre: </span><span>{dog.genre}</span></div>
 
-          <Form onSubmit={postAdoptionDog}>
+          <Form onSubmit={handleForm}>
             <input 
               type="text" 
               name="name" 

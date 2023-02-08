@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Footer, Header } from "./components";
-import { AdoptDog, DogPage, Home, Posts } from "./pages";
+import { AdoptDog, DogPage, Home, Posts, SignIn } from "./pages";
 import { Flip, ToastContainer } from "react-toastify";
 
 export const App = () => {
@@ -12,9 +12,10 @@ export const App = () => {
         <Header/>
         <Routes>
           <Route path="/" element={<Home />}/>
+          <Route path="/auth/sign-in" element={<SignIn />}/>
           <Route path="/adopt-dog" element={<AdoptDog />}/>
           <Route path="/adopt-dog/:dogId" element={<DogPage />}/>
-          <Route path="/posts-mydog" element={<Posts />}/>
+          <Route path="/posts-mydog" element={<Posts />}/>          
         </Routes>
         <Footer />      
       </BrowserRouter>     
