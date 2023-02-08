@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   height: 150px;
   background-color: var(--dark-color);
   border-top-right-radius: 100px;
-  margin-top: 100px;
+  margin-top: 50px;
   position: relative;
   bottom: 0;
   left: 0;

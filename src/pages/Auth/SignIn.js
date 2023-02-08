@@ -23,13 +23,20 @@ export const SignIn = () => {
       const user = await postSignIn(body);
 
       localStorage.setItem("token", JSON.stringify(user.token));
+      resetForm();
       navigate("/");
     } catch (error) {
       if (error.response.status === 401) {
         return toast.error("Your email or password is incorrect, please try again.");
       }
+      resetForm();
       return toast.error("Something went wrong, please try again later.");
     }
+  };
+
+  const resetForm = () => {
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -56,29 +63,29 @@ export const SignIn = () => {
             <p>Do not have an account? <span onClick={() => { navigate("/auth/sign-up"); }}>Register</span> here.</p>
           </div>  
 
-          <div>
+          <div className="div-button">
             <Button>
               Sign-In
             </Button>
           </div>
         </Form>
-
       </Wrapper>
     </>
   );
 };
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   background-color: var(--white-color);
   max-width: 30vw;
-  height: 70vh;
+  min-height: 70vh;
   margin: 0 auto;
   margin-top: 100px;
   border-radius: 10px;
   position: relative;
+  padding-bottom: 100px;
 `;
 
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,16 +102,26 @@ const Form = styled.form`
 
   span {
     color: var(--buttom-color);
+    cursor: pointer;
   }
 
+  .div-link {
+    margin-top: -10px;
+  }
+  
   button {
     position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translate(-50%, 0);
   }
+  
+  .account-type {
+    display: flex;
+    margin-bottom: 20px;
 
-  .div-link {
-    margin-top: -10px;
+    h3 {
+      margin-right: 10px;
+    }
   }
 `;

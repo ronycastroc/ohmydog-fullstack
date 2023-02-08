@@ -5,3 +5,9 @@ export const postSignIn = async (body) => {
 
   return response.data;
 };
+
+export const postSignUp = async (body) => {
+  const response = await api.post("/sign-up", body);
+
+  return response.data;
+};
