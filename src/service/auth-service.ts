@@ -12,7 +12,8 @@ const signIn = async (params: SignInParams) => {
 
   const user = await userRepository.findByEmail(email, { 
     id: true, 
-    email: true, 
+    email: true,
+    name: true, 
     password: true, 
     urlImage: true, 
     accountType: true 

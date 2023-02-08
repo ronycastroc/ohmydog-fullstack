@@ -64,6 +64,7 @@ describe("POST /sign-in", () => {
         expect(response.body.token).toBeDefined();
         expect(response.body.user).toEqual({
           id: user.id,
+          name: user.name,
           email: user.email,
           accountType: user.accountType,
           urlImage: user.urlImage
