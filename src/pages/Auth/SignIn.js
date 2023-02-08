@@ -62,7 +62,7 @@ export const SignIn = () => {
             required />
 
           <div className="div-link">
-            <p>Do not have an account? <span onClick={() => { navigate("/auth/sign-up"); }}>Register</span> here.</p>
+            <p>Do not have an account? <span onClick={() => navigate("/auth/sign-up")}>Register</span> here.</p>
           </div>  
 
           <div className="div-button">

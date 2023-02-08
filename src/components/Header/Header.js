@@ -41,7 +41,7 @@ export const Header = () => {
       </div>
       <div>
         {auth ?
-          (<p onClick={() => { setShowLogout(!showLogout); }}>Hello, {user?.name} </p>) :
+          (<p onClick={() => setShowLogout(!showLogout)}>Hello, {user?.name} </p>) :
           (<Link to="/auth/sign-in">
             Login
           </Link>)}

@@ -119,7 +119,7 @@ export const SignUp = () => {
           </div>
 
           <div className="div-link">
-            <p>Already have an account? <span onClick={() => { navigate("/auth/sign-in"); }}>Login</span> here.</p>
+            <p>Already have an account? <span onClick={() => navigate("/auth/sign-in")}>Login</span> here.</p>
           </div>
 
           <div>

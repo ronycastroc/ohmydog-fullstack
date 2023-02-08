@@ -20,3 +20,10 @@ export const postDog = async (body) => {
 
   return response.data;
 };
+
+export const updateDog = async ({ dogId, body }) => {
+  const config = createHeaders();
+  const response = await api.put(`/dogs/${dogId}`, body, config);
+
+  return response.data;
+};

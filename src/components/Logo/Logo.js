@@ -6,7 +6,7 @@ export const Logo = () => {
   const navigate = useNavigate();
 
   return (
-    <Image onClick={() => { navigate("/"); }}>
+    <Image onClick={() => navigate("/")}>
       <img src={ohmydog} alt="logo" />
     </Image>  
   );

@@ -9,7 +9,7 @@ export const Footer = () => {
   return (
     <Wrapper>
       <SocialMedia>
-        <img src={omdLogo} alt="" onClick={() => { navigate("/"); }}/>
+        <img src={omdLogo} alt="" onClick={() => navigate("/")}/>
         <IconContext.Provider value={{
           color: "var(--white-color)",
           className: "global-class-name",

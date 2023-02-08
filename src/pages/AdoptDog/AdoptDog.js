@@ -38,7 +38,7 @@ export const AdoptDog = () => {
               <img src={value.urlImage} alt="dog-image" />
               {user?.accountType === "Supporter" ? 
                 (<div className="div-icons">
-                  <BsPencilFill className="icon"/>
+                  <BsPencilFill className="icon" onClick={() => navigate(`/update-dog-adoption/${value.id}`)}/>
                   <BsTrashFill className="icon"/>
                 </div>) : ("")}
               <h1>{value.name}</h1>
@@ -46,9 +46,7 @@ export const AdoptDog = () => {
               {value.genre === "Male" ? (<MdMale className="io-male" />) : (<MdFemale className="io-female" />)}
               <p>{value.description}</p>
 
-              <div onClick={() => {
-                navigate(`/adopt-dog/${value.id}`);
-              }}>
+              <div onClick={() => navigate(`/adopt-dog/${value.id}`)}>
                 <Button>
                   I Want To Adopt
                 </Button>
