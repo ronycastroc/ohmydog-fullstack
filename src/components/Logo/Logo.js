@@ -19,12 +19,12 @@ const Image = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  margin-top: 80px;
-  margin-bottom: 20px;
+  margin-top: 70px;
+  margin-bottom: 35px;
   cursor: pointer;
     
   img {
-    width: 200px;
+    width: 250px;
 
   }
 `;

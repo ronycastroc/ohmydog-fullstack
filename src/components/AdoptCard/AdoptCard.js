@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { Button } from "../Buttton/Button";
 
 export const AdoptCard = () => {
+  const navigate = useNavigate();
+
   return (
     <DisplayCard>
       <Card>
@@ -17,19 +21,29 @@ export const AdoptCard = () => {
           Ut ducimus animi necessitatibus, optio labore voluptatibus repudiandae deleniti natus atque veniam eveniet iure officiis doloribus incidunt ullam officia neque? Odio suscipit ipsa nulla deleniti neque eius a qui nisi.
           Nesciunt vitae at, tempora eaque possimus amet, culpa adipisci quibusdam ab porro unde laudantium recusandae. Nisi doloribus possimus temporibus incidunt beatae quia. Eius, nam veniam. Cum esse minima nulla facere!</p>
       </Card>
+
+      <div onClick={() => { navigate("/add-dog-adoption"); }}>
+        <Button>
+          Are you a supporter? Add a dog for adoption here
+        </Button>
+      </div>
     </DisplayCard>
   );
 };
 
 const DisplayCard = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    margin-top: -10px;
+  }
 `;
 
 const Card = styled.div`
   background-color: var(--white-color);
   width: 35vw;  
-  border-radius: 40px;
+  border-radius: 10px;
   margin-left: 40px;
   margin-bottom: 30px;
 
@@ -42,7 +56,7 @@ const Card = styled.div`
   }
 
   p {
-    padding: 15px 20px;
+    padding: 20px 20px;
     color: var(--dark-color);
   }
 `;

@@ -6,36 +6,23 @@ import { getDogFact, getDogPic } from "../../services";
 export const CardFacts = () => {
   const [dogPic, setDogPic] = useState();
   const [dogFact, setDogFact] = useState();
-  
+
+  const getPicsFacts = async () => {
+    try {      
+      const pictures = await getDogPic();
+      const facts = await getDogFact();
+
+      setDogPic(pictures.message);
+      setDogFact(facts.facts[0]);        
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+    
   useEffect(() => {
-    const fetchData = async () => {
-      try {      
-        const pictures = await getDogPic();
-        const facts = await getDogFact();
-  
-        setDogPic(pictures.message);
-        setDogFact(facts.facts[0]);        
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchData();    
-  }, []);
-  
-  useEffect(() => {
+    getPicsFacts();
     const intervalId = setInterval(() => {
-      const fetchData = async () => {
-        try {      
-          const pictures = await getDogPic();
-          const facts = await getDogFact();
-  
-          setDogPic(pictures.message);
-          setDogFact(facts.facts[0]);   
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
-      fetchData();    
+      getPicsFacts();
     }, 10000);
 
     return () => {
@@ -45,7 +32,7 @@ export const CardFacts = () => {
 
   return (
     <Wrapper>
-      <img src={dogPic} alt="" />
+      <img src={dogPic} alt="dog-picture" />
       <h1>Did you know?</h1>
       <p>{dogFact}</p>
     </Wrapper>
@@ -57,7 +44,7 @@ const Wrapper = styled.div`
   background-color: var(--white-color);
   width: 25vw;
   max-height: 100%;
-  border-radius: 40px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -82,7 +69,7 @@ const Wrapper = styled.div`
     width: 22vw;
     height: 50vh;
     object-fit: cover;
-    border-radius: 40px;
+    border-radius: 10px;
     margin: 0 auto;
     margin-top: 20px;    
   }

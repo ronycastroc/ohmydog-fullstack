@@ -36,7 +36,7 @@ export const Header = () => {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 60px;
+  height: 40px;
   background-color: var(--dark-color);
   border-bottom-left-radius: 100px;
   display: flex;
@@ -47,6 +47,7 @@ const Wrapper = styled.div`
   right: 0;
   z-index: 1;
   opacity: 0.95;
+  
 
   a {
     color: var(--white-color);

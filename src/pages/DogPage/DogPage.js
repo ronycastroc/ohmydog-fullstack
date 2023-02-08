@@ -141,7 +141,7 @@ const Wrapper = styled.div`
 const DogForm = styled.div`
   background-color: var(--white-color);
   width: 50vw;
-  border-radius: 40px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,7 +159,7 @@ const DogForm = styled.div`
     width: 30vw;
     height: 250px;
     object-fit: cover;
-    border-radius: 40px;
+    border-radius: 10px;
   }
 
   div {

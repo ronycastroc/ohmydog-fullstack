@@ -33,7 +33,7 @@ const Display = styled.div`
 const Wrapper = styled.div`
   background-color: var(--white-color);
   width: 60vw;
-  border-radius: 40px;
+  border-radius: 10px;
   margin-bottom: 30px;
   margin-left: 50px;
 
@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   }
 
   p {
-    padding: 15px 20px;
+    padding: 20px 20px;
     color: var(--dark-color);
   }
 `;

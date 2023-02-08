@@ -28,24 +28,25 @@ export const AdoptDog = () => {
   return (
     <>
       <Logo />
+      
       <Wrapper>
         <AdoptCard />
         <Dogs>
           {dogs.map((value, index) => (
-            <Dog key ={index}>
+            <Dog key={index}>
               <img src={value.urlImage} alt="dog-image" />
               <h1>{value.name}</h1>
               <h2>{value.age}</h2>
-              {value.genre === "Male" ? (<MdMale className="io-male"/>) : (<MdFemale className="io-female" />)}
+              {value.genre === "Male" ? (<MdMale className="io-male" />) : (<MdFemale className="io-female" />)}
               <p>{value.description}</p>
-              
+
               <div onClick={() => {
                 navigate(`/adopt-dog/${value.id}`);
               }}>
                 <Button>
                   I Want To Adopt
                 </Button>
-              </div>              
+              </div>
             </Dog>
           ))}
         </Dogs>
@@ -71,15 +72,15 @@ const Dog = styled.div`
   background-color: var(--white-color);
   width: 270px;
   margin-bottom: 30px;
-  border-radius: 40px;
+  border-radius: 10px;
   position: relative;
 
   img {
     width: 100%;
     height: 250px;
     object-fit: cover;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
 
   h1 {
@@ -94,7 +95,7 @@ const Dog = styled.div`
 
   p {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 20px;
   }
 

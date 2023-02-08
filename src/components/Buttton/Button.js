@@ -11,12 +11,12 @@ export const Button = ({ children }) => {
 const Wrapper = styled.button`
   background-color: var(--buttom-color);
   width: auto;
-  height: 40px;
+  height: 35px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 40px;
+  border-radius: 10px;
   margin-bottom: 10px;
   cursor: pointer;
   display: table;
@@ -30,6 +30,6 @@ const Wrapper = styled.button`
     vertical-align: middle;
     display: table-cell;
     font-family: 'Roboto Slab', serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 `;
