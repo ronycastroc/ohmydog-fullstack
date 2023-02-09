@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   border-radius: 10px;
   position: relative;
   padding-bottom: 100px;
+  box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
 `;
 
 export const Form = styled.form`
@@ -38,8 +39,6 @@ export const Form = styled.form`
   button {
     position: absolute;
     bottom: 10px;
-    left: 50%;
-    transform: translate(-50%, 0);
   }
   
   .type {

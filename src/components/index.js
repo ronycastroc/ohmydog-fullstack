@@ -7,3 +7,4 @@ export * from "./AdoptCard/AdoptCard";
 export * from "./Buttton/Button";
 export * from "./Overlay/Overlay";
 export * from "./AddDogButton/AddDogButton";
+export * from "./ComingSoon/ComingSoon";

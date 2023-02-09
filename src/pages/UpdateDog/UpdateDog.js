@@ -117,11 +117,9 @@ export const UpdateDog = () => {
             </select>
           </div>
 
-          <div>
-            <Button>
-              Update Dog
-            </Button>
-          </div>
+          <Button>
+            Update Dog
+          </Button>
         </Form>
       </Wrapper>
     </>

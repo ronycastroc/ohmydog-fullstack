@@ -6,3 +6,5 @@ export * from "./Auth/SignIn";
 export * from "./Auth/SignUp";
 export * from "./AddDog/AddDog";
 export * from "./UpdateDog/UpdateDog";
+export * from "./BeASupporter/BeASupporter";
+export * from "./StoriesPage/StoriesPage";

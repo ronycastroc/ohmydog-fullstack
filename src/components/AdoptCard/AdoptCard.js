@@ -39,6 +39,7 @@ const Card = styled.div`
   border-radius: 10px;
   margin-right: 30px;
   margin-bottom: 30px;
+  box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
 
   h1 {
     font-weight: 700;

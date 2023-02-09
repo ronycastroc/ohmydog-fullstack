@@ -21,6 +21,7 @@ const Wrapper = styled.button`
   cursor: pointer;
   display: table;
   border: 1px solid var(--black-color);
+  transition: 0.4s;
 
   p {
     padding-left: 10px;
@@ -32,4 +33,9 @@ const Wrapper = styled.button`
     font-family: 'Roboto Slab', serif;
     font-size: 0.95rem;
   }
+
+  &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+   }  
 `;

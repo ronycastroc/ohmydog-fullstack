@@ -18,23 +18,23 @@ export const Header = () => {
   };
   return (
     <Wrapper>
-      <div>
+      <div className="pages">
         <Link to="/adopt-dog">
           AdoptDog
         </Link>
         <h2></h2>
       </div>
-      <div>
+      <div className="pages">
         <Link to="/posts-mydog">
           PostsMyDog
         </Link>
       </div>
-      <div>
+      <div className="pages">
         <Link to="/be-a-supporter">
           Be a Supporter
         </Link>
       </div>
-      <div>
+      <div className="pages">
         <Link to="/stories">
           Stories
         </Link>
@@ -66,14 +66,18 @@ const Wrapper = styled.div`
   top: 0;
   right: 0;
   z-index: 3;
-  opacity: 0.95;
-  
+  opacity: 0.9;
 
   a {
     color: var(--white-color);
     font-size: 1.1rem;
     font-weight: 500;
     text-decoration: none;
+    transition: all linear .2s;
+
+    &:hover {
+      text-shadow: 3px 5px 6px #000000;
+    }
   }
 
   p {
@@ -85,6 +89,11 @@ const Wrapper = styled.div`
     top: 50%;
     right: 20px;
     transform: translate(0, -50%);
+    transition: all linear .2s;
+
+    &:hover {
+      text-shadow: 3px 5px 6px #000000;
+    }
   }
 `;
 

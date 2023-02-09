@@ -51,6 +51,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
 `;
 
 const LogoFooter = styled.div`

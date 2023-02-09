@@ -41,7 +41,7 @@ export const CardFacts = () => {
 
 
 const Wrapper = styled.div`
-  background-color: var(--white-color);
+  background-color: var(--button-color);
   width: 25vw;
   max-height: 100%;
   border-radius: 10px;
@@ -50,18 +50,19 @@ const Wrapper = styled.div`
   position: absolute;
   top: 0;
   right: 50px;
+  box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
 
   h1 {
     font-weight: 700;
     font-size: 1.2rem;
     padding-top: 20px;
     padding-left: 20px;
-    color: var(--dark-color);
+    color: var(--back-color);
   }
 
   p {
     padding: 15px 20px;
-    color: var(--dark-color);
+    color: var(--black-color);
     font-size: 1.1rem;
   }
 

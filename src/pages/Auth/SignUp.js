@@ -53,7 +53,7 @@ export const SignUp = () => {
       return toast.error("Something went wrong, please try again later.");
     }
 
-  },[name, email, password, urlImage, accountType]);
+  }, [name, email, password, urlImage, accountType]);
 
   const resetForm = () => {
     setName("");
@@ -121,12 +121,10 @@ export const SignUp = () => {
           <div className="div-link">
             <p>Already have an account? <span onClick={() => navigate("/auth/sign-in")}>Login</span> here.</p>
           </div>
-
-          <div>
-            <Button>
-              Sign-Up
-            </Button>
-          </div>
+          
+          <Button>
+            Sign-Up
+          </Button>
         </Form>
       </Wrapper>
     </>

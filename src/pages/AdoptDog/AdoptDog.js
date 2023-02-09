@@ -116,6 +116,7 @@ const Dog = styled.div`
   margin-bottom: 30px;
   border-radius: 10px;
   position: relative;
+  box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
 
   img {
     width: 100%;

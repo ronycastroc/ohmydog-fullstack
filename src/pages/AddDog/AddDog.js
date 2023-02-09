@@ -77,7 +77,7 @@ export const AddDog = () => {
             placeholder="Little Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            required />          
+            required />
 
           <div className="type">
             <h3>Select age: </h3>
@@ -97,11 +97,9 @@ export const AddDog = () => {
             </select>
           </div>
 
-          <div>
-            <Button>
-              Send Dog 
-            </Button>
-          </div>
+          <Button>
+            Send Dog
+          </Button>
         </Form>
       </Wrapper>
     </>

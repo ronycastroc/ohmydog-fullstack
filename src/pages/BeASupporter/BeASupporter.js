@@ -1,8 +1,7 @@
 import { ComingSoon } from "../../components";
 
-export const Posts = () => {
+export const BeASupporter = () => {
   return (
     <ComingSoon />
   );
 };
-

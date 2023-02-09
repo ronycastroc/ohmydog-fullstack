@@ -46,30 +46,30 @@ export const SignIn = () => {
       <Wrapper>
         <Logo />
         <Form onSubmit={handleForm}>
-          <input 
-            type="email" 
-            name="email" 
-            placeholder="Email" 
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required />
-          <input 
-            type="password" 
-            name="password" 
-            placeholder="Password" 
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required />
 
           <div className="div-link">
             <p>Do not have an account? <span onClick={() => navigate("/auth/sign-up")}>Register</span> here.</p>
-          </div>  
-
-          <div className="div-button">
-            <Button>
-              Sign-In
-            </Button>
           </div>
+
+
+          <Button>
+            Sign-In
+          </Button>
+
         </Form>
       </Wrapper>
     </>
