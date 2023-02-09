@@ -77,6 +77,7 @@ export const AddDog = () => {
             placeholder="Little Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            maxLength="26"
             required />
 
           <div className="type">

@@ -51,6 +51,7 @@ const Wrapper = styled.div`
   top: 0;
   right: 50px;
   box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
+  padding-bottom: 10px;
 
   @media (max-width: 600px) {
     display: none;
@@ -68,6 +69,25 @@ const Wrapper = styled.div`
     padding: 15px 20px;
     color: var(--black-color);
     font-size: 1.1rem;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey; 
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--black-color);  
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #333333; 
+    }
   }
 
   img {
