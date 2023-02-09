@@ -60,10 +60,12 @@ const LogoFooter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   
   img {
     width: 12.5vw;
     color: var(--white-color);
+    margin-bottom: 10px;
     cursor: pointer;
   }
 

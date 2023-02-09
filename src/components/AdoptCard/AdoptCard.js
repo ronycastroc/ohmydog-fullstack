@@ -12,7 +12,7 @@ export const AdoptCard = () => {
           Nulla assumenda sunt officiis hic sit blanditiis rem, est, adipisci iure magnam facere minima sint fugiat quos. Earum minus dolor, repellendus, numquam maxime perferendis eius unde officia adipisci aut veritatis!</p>
       </Card>
       <Card>
-        <h1>Adopting is a gesture of love</h1>
+        <h1>Adopting is a gesture of love.</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, corporis laboriosam. Facilis voluptate delectus reprehenderit labore repudiandae natus. Molestiae sapiente deserunt similique praesentium iure vitae, excepturi iusto esse laboriosam placeat?
           Quae necessitatibus deleniti, culpa magni natus repellendus dolor quod labore quibusdam voluptas ad nulla architecto suscipit animi, atque excepturi dignissimos tempore velit deserunt mollitia accusamus vel adipisci provident. Nisi, nam?
           Ut ducimus animi necessitatibus, optio labore voluptatibus repudiandae deleniti natus atque veniam eveniet iure officiis doloribus incidunt ullam officia neque? Odio suscipit ipsa nulla deleniti neque eius a qui nisi.

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Footer, Header, Overlay } from "./components";
+import { Footer, Header, MenuMobile, Overlay } from "./components";
 import { 
   AddDog, 
   AdoptDog, 
@@ -23,6 +23,7 @@ export const App = () => {
         <UserProvider>
           <Overlay />
           <Header />
+          <MenuMobile />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth/sign-in" element={<SignIn />} />

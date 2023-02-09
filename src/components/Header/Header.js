@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../../contexts/UserContext";
+import omdhome from "../../assets/images/logo-home.png";
+import { AiOutlineMenu } from "react-icons/ai";
 
 export const Header = () => {
   const { showLogout, setShowLogout } = useContext(UserContext);
@@ -16,25 +18,29 @@ export const Header = () => {
     localStorage.clear();
     navigate("/");
   };
+
   return (
     <Wrapper>
-      <div className="pages">
+      <LogoHome onClick={() => navigate("/")}>
+        <img src={omdhome} alt="" />
+      </LogoHome>
+      <div>
         <Link to="/adopt-dog">
           AdoptDog
         </Link>
         <h2></h2>
       </div>
-      <div className="pages">
+      <div>
         <Link to="/posts-mydog">
           PostsMyDog
         </Link>
       </div>
-      <div className="pages">
+      <div>
         <Link to="/be-a-supporter">
           Be a Supporter
         </Link>
       </div>
-      <div className="pages">
+      <div>
         <Link to="/stories">
           Stories
         </Link>
@@ -50,11 +56,31 @@ export const Header = () => {
       <LogoutBar showLogout={showLogout} onClick={logout}>
         <p>Logout</p>
       </LogoutBar>
+      
+      <Icon>
+        <AiOutlineMenu onClick={() => setShowLogout(!showLogout)} className="icon-menu"/>
+      </Icon>      
     </Wrapper>
   );
 };
 
+const Icon = styled.div`
+  position: absolute;
+  right: 5px;
+  display: none;
+  
+  @media (max-width: 600px) {
+      display: initial;
+    }
+
+  .icon-menu {
+    color: var(--white-color);
+    font-size: 1.6rem;
+  }
+`;
+
 const Wrapper = styled.div`
+  padding-left: 40px;
   width: 100%;
   height: 45px;
   background-color: var(--dark-color);
@@ -65,7 +91,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 3;
+  z-index: 4;
   opacity: 0.9;
 
   a {
@@ -74,9 +100,12 @@ const Wrapper = styled.div`
     font-weight: 500;
     text-decoration: none;
     transition: all linear .2s;
+    @media (max-width: 600px) {
+      display: none;
+    }
 
     &:hover {
-      text-shadow: 3px 5px 6px #000000;
+      text-shadow: 0px 0px 20px #C7B2F4;
     }
   }
 
@@ -90,10 +119,23 @@ const Wrapper = styled.div`
     right: 20px;
     transform: translate(0, -50%);
     transition: all linear .2s;
+    
+    @media (max-width: 600px) {
+      display: none;
+    }
 
     &:hover {
-      text-shadow: 3px 5px 6px #000000;
+      text-shadow: 0px 0px 20px #C7B2F4;
     }
+  }
+`;
+
+const LogoHome = styled.div`
+position: absolute;
+left: 30px;
+cursor: pointer;
+  img {
+    width: 45px;
   }
 `;
 
@@ -112,6 +154,11 @@ const LogoutBar = styled.div`
   transform: ${(props) => (props.showLogout ? "translateX(0)" : "translateX(150px)")};    
   cursor: pointer;
   z-index: 3;
+
+  @media (max-width: 600px) {
+      display: none;
+      z-index: -1;
+    }
 
   p {
     color: var(--white-color);
