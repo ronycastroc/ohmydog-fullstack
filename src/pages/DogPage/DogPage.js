@@ -147,12 +147,19 @@ const DogForm = styled.div`
   align-items: center;
   position: relative;
 
+  @media (max-width: 600px) {
+   width: 90%;
+  }
+
   h1 {
     font-weight: 700;
     font-size: 1.2rem;
     padding-top: 20px;
     padding-bottom: 20px;
     color: var(--dark-color);
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
   }
 
   img {
@@ -160,6 +167,10 @@ const DogForm = styled.div`
     height: 250px;
     object-fit: cover;
     border-radius: 10px;
+
+    @media (max-width: 600px) {
+     width: 80%;
+   }
   }
 
   div {

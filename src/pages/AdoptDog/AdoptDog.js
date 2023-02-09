@@ -98,8 +98,12 @@ export const AdoptDog = () => {
 };
 
 const Wrapper = styled.div`
-display: flex;
-justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const Dogs = styled.div`
@@ -107,7 +111,11 @@ const Dogs = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  column-gap: 20px;
+  column-gap: 10px;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const Dog = styled.div`
@@ -117,6 +125,10 @@ const Dog = styled.div`
   border-radius: 10px;
   position: relative;
   box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 600px) {
+    width: 200px;
+  }
 
   img {
     width: 100%;

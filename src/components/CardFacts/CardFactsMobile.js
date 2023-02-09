@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { getDogFact, getDogPic } from "../../services";
 
 
-export const CardFacts = () => {
+export const CardFactsMobile = () => {
   const [dogPic, setDogPic] = useState();
   const [dogFact, setDogFact] = useState();
 
@@ -42,18 +42,17 @@ export const CardFacts = () => {
 
 const Wrapper = styled.div`
   background-color: var(--button-color);
-  width: 25vw;
+  width: 90%;
   max-height: 100%;
   border-radius: 10px;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 0;
-  right: 50px;
   box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
+  display: none;
 
   @media (max-width: 600px) {
-    display: none;
+    display: initial;
   }
 
   h1 {
@@ -71,15 +70,12 @@ const Wrapper = styled.div`
   }
 
   img {
-    width: 22vw;
+    width: 90%;
     height: 45vh;
     object-fit: cover;
     border-radius: 10px;
     margin: 0 auto;
     margin-top: 20px;
-
-    @media (max-width: 600px) {
-      width: 90% ;
-    }    
+    display: flex;
   }
 `;

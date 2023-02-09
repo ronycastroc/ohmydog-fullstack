@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CardFacts, Logo, MainCard } from "../../components";
+import { CardFacts, CardFactsMobile, Logo, MainCard } from "../../components";
 
 
 export const Home = () => {  
@@ -7,6 +7,7 @@ export const Home = () => {
     <>
       <Logo />
       <Cards>
+        <CardFactsMobile />
         <MainCard />
         <CardFacts />        
       </Cards>       
@@ -18,6 +19,10 @@ const Cards = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  
+  @media (max-width: 600px) {      
+    flex-direction: column;
+    }
 `;
 
 

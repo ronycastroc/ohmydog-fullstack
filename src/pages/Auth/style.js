@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   background-color: var(--white-color);
-  max-width: 30vw;
+  width: 30vw;
   min-height: 70vh;
   margin: 0 auto;
   margin-top: 100px;
@@ -10,6 +10,10 @@ export const Wrapper = styled.div`
   position: relative;
   padding-bottom: 100px;
   box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
+  
+  @media (max-width: 600px) {
+    width: 90%;
+  }
 `;
 
 export const Form = styled.form`

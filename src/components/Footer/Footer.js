@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Footer = () => {
   const navigate = useNavigate();
+
   return (
     <Wrapper>
       <Contact>
@@ -52,21 +53,35 @@ const Wrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    height: auto;
+  }
 `;
 
 const LogoFooter = styled.div`
-  width: 20%;
+  width: 90%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    height: 100px;
+  }
   
   img {
     width: 12.5vw;
     color: var(--white-color);
     margin-bottom: 10px;
     cursor: pointer;
+
+    @media (max-width: 600px) {
+      width: 40%;    
+    }
   }
 
   p {
@@ -81,7 +96,15 @@ const Contact = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-left: 30px;
   
+  @media (max-width: 600px) {
+    width: 100%;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: inherit;
+  }
 
   .icon-info {
     color: var(--white-color);
@@ -107,6 +130,13 @@ const SocialMedia = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-right: 50px;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    height: 130px;
+    margin-right: inherit;
+  }
 
   h1 {
     text-align: center;
