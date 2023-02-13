@@ -50,7 +50,7 @@ export const AdoptDog = () => {
       confirmButtonColor: "#229A00",
       cancelButtonColor: "#D33",
       confirmButtonText: "Yes, delete it!",
-      scrollbarPadding: false, 
+      scrollbarPadding: false,
     }).then((result) => {
       if (result.isConfirmed) {
         deleteDogFunc(dogId);
@@ -66,29 +66,37 @@ export const AdoptDog = () => {
   return (
     <>
       <Logo />
-      
+
       <Wrapper>
         <Dogs>
-          {dogs.map((value, index) => (
-            <Dog key={index}>
-              <img src={value.urlImage} alt="dog-image" />
-              {user?.accountType === "Supporter" ? 
-                (<div className="div-icons">
-                  <BsPencilFill className="icon" onClick={() => navigate(`/update-dog-adoption/${value.id}`)}/>
-                  <BsTrashFill className="icon" onClick={() => deleteConfirmation(value.id)}/>
-                </div>) : ("")}
-              <h1>{value.name}</h1>
-              <h2>{value.age}</h2>
-              {value.genre === "Male" ? (<MdMale className="io-male" />) : (<MdFemale className="io-female" />)}
-              <p>{value.description}</p>
+          {dogs.length === 0 ?
+            (
+              <h1 className="no-puppies">There are no puppies for adoption yet.</h1>
+            ) : (
+              <>
+                {dogs.length > 0 && dogs.map((value, index) => (
+                  <Dog key={index}>
+                    <img src={value.urlImage} alt="dog-image" />
+                    {user?.accountType === "Supporter" ?
+                      (<div className="div-icons">
+                        <BsPencilFill className="icon" onClick={() => navigate(`/update-dog-adoption/${value.id}`)} />
+                        <BsTrashFill className="icon" onClick={() => deleteConfirmation(value.id)} />
+                      </div>) : ("")}
+                    <h1>{value.name}</h1>
+                    <h2>{value.age}</h2>
+                    {value.genre === "Male" ? (<MdMale className="io-male" />) : (<MdFemale className="io-female" />)}
+                    <p>{value.description}</p>
 
-              <div onClick={() => navigate(`/adopt-dog/${value.id}`)}>
-                <Button>
-                  I Want To Adopt
-                </Button>
-              </div>
-            </Dog>
-          ))}
+                    <div onClick={() => navigate(`/adopt-dog/${value.id}`)}>
+                      <Button>
+                        I Want To Adopt
+                      </Button>
+                    </div>
+                  </Dog>
+                ))}
+              </>
+            )}
+
         </Dogs>
 
         <AdoptCard />
@@ -100,6 +108,14 @@ export const AdoptDog = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
+
+  .no-puppies {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    font-weight: 500;
+  }
 
   @media (max-width: 600px) {
     flex-direction: column;

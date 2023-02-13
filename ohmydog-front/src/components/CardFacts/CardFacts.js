@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getDogFact, getDogPic } from "../../services";
+import { ColorRing } from "react-loader-spinner";
 
 
 export const CardFacts = () => {
@@ -8,17 +9,17 @@ export const CardFacts = () => {
   const [dogFact, setDogFact] = useState();
 
   const getPicsFacts = async () => {
-    try {      
+    try {
       const pictures = await getDogPic();
       const facts = await getDogFact();
 
       setDogPic(pictures.message);
-      setDogFact(facts.facts[0]);        
+      setDogFact(facts.facts[0]);
     } catch (error) {
       console.log(error.message);
     }
   };
-    
+
   useEffect(() => {
     getPicsFacts();
     const intervalId = setInterval(() => {
@@ -32,7 +33,20 @@ export const CardFacts = () => {
 
   return (
     <Wrapper>
-      <img src={dogPic} alt="dog-picture" />
+      {dogPic === undefined ? (
+        <div>
+          <ColorRing
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={[]}
+          />
+        </div>) 
+        :
+        (<img src={dogPic} alt="dog-picture" />)}
       <h1>Did you know?</h1>
       <p>{dogFact}</p>
     </Wrapper>
@@ -52,6 +66,15 @@ const Wrapper = styled.div`
   right: 50px;
   box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.2);
   padding-bottom: 10px;
+  
+  div {
+    width: 22vw;
+    height: 45vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
 
   @media (max-width: 600px) {
     display: none;
