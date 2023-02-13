@@ -69,12 +69,12 @@ export const AdoptDog = () => {
 
       <Wrapper>
         <Dogs>
-          {dogs.length === 0 ?
+          {dogs?.length === 0 ?
             (
               <h1 className="no-puppies">There are no puppies for adoption yet.</h1>
             ) : (
               <>
-                {dogs.length > 0 && dogs.map((value, index) => (
+                {dogs?.length > 0 && dogs?.map((value, index) => (
                   <Dog key={index}>
                     <img src={value.urlImage} alt="dog-image" />
                     {user?.accountType === "Supporter" ?
