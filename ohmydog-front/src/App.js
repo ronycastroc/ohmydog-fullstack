@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Footer, Header, MenuMobile, Overlay } from "./components";
 import { 
   AddDog, 
@@ -29,9 +29,9 @@ export const App = () => {
             <Route path="/auth/sign-in" element={<SignIn />} />
             <Route path="/auth/sign-up" element={<SignUp />} />
             <Route path="/adopt-dog" element={<AdoptDog />} />
-            <Route path="/adopt-dog/:dogId" element={<DogPage />} />
-            <Route path="/add-dog-adoption" element={<AddDog />} />
-            <Route path="/update-dog-adoption/:dogId" element={<UpdateDog />} />
+            <Route path="/adopt-dog/:dogId" element={<PrivatePage><DogPage /></PrivatePage>} />
+            <Route path="/add-dog-adoption" element={<PrivatePage><AddDog /></PrivatePage>} />
+            <Route path="/update-dog-adoption/:dogId" element={<PrivatePage><UpdateDog /></PrivatePage>} />
             <Route path="/posts-mydog" element={<Posts />} />
             <Route path="/be-a-supporter" element={<BeASupporter />} />
             <Route path="/stories" element={<StoriesPage />} />
@@ -39,6 +39,19 @@ export const App = () => {
           <Footer />
         </UserProvider>
       </BrowserRouter>
+    </>
+  );
+};
+
+const PrivatePage = ({ children }) => {
+  const auth = JSON.parse(localStorage.getItem("token"));
+  if (!auth) {
+    return <Navigate to="/" />;
+  }
+
+  return (
+    <>
+      {children}      
     </>
   );
 };
