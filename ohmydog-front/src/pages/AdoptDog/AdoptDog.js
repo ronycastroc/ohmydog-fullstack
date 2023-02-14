@@ -11,7 +11,9 @@ import Swal from "sweetalert2";
 export const AdoptDog = () => {
   const [dogs, setDogs] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  
   const user = JSON.parse(localStorage.getItem("user"));
+  const auth = JSON.parse(localStorage.getItem("token"));
 
   const navigate = useNavigate();
 
@@ -40,6 +42,13 @@ export const AdoptDog = () => {
       return toast.error("Something went wrong, please try again later.");
     }
   }, [refresh]);
+
+  const goToDogPage = (dogId) => {
+    if (!auth) {
+      return toast.warning("You are not logged in, create an account and try again.");
+    }
+    navigate(`/adopt-dog/${dogId}`);
+  };  
 
   const deleteConfirmation = (dogId) => {
     Swal.fire({
@@ -88,7 +97,7 @@ export const AdoptDog = () => {
                     {value.genre === "Male" ? (<MdMale className="io-male" />) : (<MdFemale className="io-female" />)}
                     <p>{value.description}</p>
 
-                    <div onClick={() => navigate(`/adopt-dog/${value.id}`)}>
+                    <div onClick={() => goToDogPage(value.id)}>
                       <Button>
                         I Want To Adopt
                       </Button>
