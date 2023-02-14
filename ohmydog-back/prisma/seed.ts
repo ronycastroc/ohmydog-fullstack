@@ -1,16 +1,19 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 import * as fs from "graceful-fs";
 
 const prisma = new PrismaClient();
 
 const main = async () => {
+  const hashPassword = bcrypt.hashSync("123456", 10);
+
   const dogs = await prisma.dogs.findFirst();
   if (!dogs) {
     const user = await prisma.users.create({
       data: {
         name: "Teste",
         email: "teste@teste.com",
-        password: "123456",
+        password: hashPassword,
         urlImage: "https://img.freepik.com/fotos-gratis/lindo-retrato-de-cachorro_23-2149218450.jpg",
         accountType: "Supporter",
       },
