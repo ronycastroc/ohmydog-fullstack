@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Clean 1
+      run: docker-compose -f "docker-compose.yml" down -v
+    - name: Clean 2
+      run: docker container prune
+    - name: Clean 3
+      run: docker system prune -a -f --volumes
+    - name: Build the Docker image
+      run: docker-compose -f "docker-compose.yml" up -d --build
