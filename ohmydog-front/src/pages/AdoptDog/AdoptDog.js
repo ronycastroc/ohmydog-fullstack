@@ -15,15 +15,15 @@ export const AdoptDog = () => {
 
   const navigate = useNavigate();
 
-  const getDogsFunc = async () => {
+  const getDogsFunc = useCallback(async () => {
     try {
       const response = await getDogs();
 
-      setDogs(response);
+      setDogs(response);  
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [refresh]);
 
   useEffect(() => {
     getDogsFunc();
@@ -54,6 +54,7 @@ export const AdoptDog = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteDogFunc(dogId);
+        getDogsFunc();
         Swal.fire(
           "Deleted!",
           "Your file has been deleted.",
@@ -74,7 +75,7 @@ export const AdoptDog = () => {
               <h1 className="no-puppies">There are no puppies for adoption yet.</h1>
             ) : (
               <>
-                {dogs?.length > 0 && dogs?.map((value, index) => (
+                {dogs?.map((value, index) => (
                   <Dog key={index}>
                     <img src={value.urlImage} alt="dog-image" />
                     {user?.accountType === "Supporter" ?
@@ -96,9 +97,7 @@ export const AdoptDog = () => {
                 ))}
               </>
             )}
-
         </Dogs>
-
         <AdoptCard />
       </Wrapper>
     </>
