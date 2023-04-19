@@ -11,7 +11,7 @@ React | Node | TypeScript | PostgreSQL | Prisma | Jest | CD/CI | Docker | AWS
 `docker-compose down -v`
 
 ### Project link running on aws
-<http://54.208.179.174/>
+<http://100.25.204.154/>
 
 #### Test account with support type for some restricted functions:
 ~~~
